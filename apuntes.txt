@@ -1,0 +1,83 @@
+
+
+
+- Instalar composer para windows
+
+- Instalar node.js para restructuracion de bootstrap
+
+
+Creo la aplicacion Gihal en laravel
+C:\xampp\htdocs> composer create-project laravel/laravel gihal
+
+Instalamos las plantillas para la autentificacion
+C:\xampp\htdocs\gihal> composer require laravel/ui
+
+
+Vamos a integrar Bootstrap con la autentificacion
+C:\xampp\htdocs\gihal> php artisan ui bootstrap --auth
+
+Despues de esto hay que instalar los paquetes
+C:\xampp\htdocs\gihal> npm install
+
+despues ejecutamos el servidor en una consola de comandos distinta
+C:\xampp\htdocs\gihal> npm run dev
+
+
+
+
+
+Creo la bbdd
+CREATE DATABASE IF NOT EXISTS `gihal` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+- En el archivo .env se configura la conexion con la bbdd
+
+- En database/migrations tenemos el codigo para crear la estructura de la bbdd
+
+- creamos la migracion por ejemplo de ubicaciones
+    php artisan make:migration create_ubicaciones_table
+
+
+- Para ejecutar todo el contenido de migrations:  php artisan migrate
+
+
+-hay que modificar el login para que sea solo de usuario y contraseña
+
+https://www.youtube.com/watch?v=y0HBjmS4Kho&t=2s
+
+
+
+entramos en la pagina:
+
+http://localhost/gihal/public/
+
+¡¡¡¡¡¡¡¡¡IMPORTANTE!!!!!!! registramos un usuario: admin / password
+
+
+
+
+- Para crear un modelo:  php artisan make:model Ubicacion -mcr
+   m: modelo
+   c: controlador
+   r: recurso
+
+   En el controlador tenemos todos los metodos para el CRUD
+
+- En los archivos de migracion creamos la estructura de campos de la tabla. Disponemos de una ayuda para escoger el tipo de
+  de dato de la columna.
+
+- Para ver el listado de rutas activas:  php artisan route:list
+
+
+La paginacion se activa en AppServiceProvider
+
+
+Para las busquedas utilizo laravel/scout. añade full-text serach a los models eloquent
+https://www.itsolutionstuff.com/post/laravel-9-scout-full-text-search-tutorialexample.html
+
+composer require laravel/scout
+
+php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
+
+
+**** Para el tema del control del acceso a las rutas por role se ha realizado por middleware
+ademas de un control con @if en el navbar
