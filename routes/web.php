@@ -8,6 +8,9 @@ use App\Http\Controllers\UbicacionController;
 //Importamos la clase UserController
 use App\Http\Controllers\UserController;
 
+//Importamos la clase PersonaController
+use App\Http\Controllers\PersonaController;
+
 
 
 /*
@@ -54,6 +57,7 @@ Route::group(['middleware' => ['auth', 'es-administrador']], function () {
 //restriccion de acceso a routes por usuario autententicado y permiso esGestor
 Route::group(['middleware' => ['auth', 'es-gestor']], function () {
     Route::resource('ubicacion', UbicacionController::class);
+    Route::resource('persona', PersonaController::class);
 });
 
 
