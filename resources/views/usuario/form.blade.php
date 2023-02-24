@@ -1,5 +1,5 @@
 <fieldset class="border border-dark border-1 p-4 mt-4">
-    <legend class="float-none w-auto px-3 " style="font-size:2rem">
+    <legend class="float-none w-auto px-3 legend-form">
         FICHA DE USUARIO
     </legend>
 
