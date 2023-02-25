@@ -54,7 +54,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarGestion">
                                 <a class="dropdown-item" href="{{ route('ubicacion.index') }}">{{ __('Ubicaciones') }}</a>
                                 <a class="dropdown-item" href="{{ route('persona.index') }}">{{ __('Personas') }}</a>
-                                <a class="dropdown-item" href="#">Contrataciones</a>
+                                <a class="dropdown-item" href="{{ route('contratacion.index') }}">{{ __('Contrataciones') }}</a>
                                 <a class="dropdown-item" href="#">Tipos de equipo</a>
                                 <a class="dropdown-item" href="#">Equipo</a>
                             </div>

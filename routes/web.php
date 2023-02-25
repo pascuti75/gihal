@@ -11,7 +11,8 @@ use App\Http\Controllers\UserController;
 //Importamos la clase PersonaController
 use App\Http\Controllers\PersonaController;
 
-
+//Importamos la clase ContratacionController
+use App\Http\Controllers\ContratacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,7 @@ Route::group(['middleware' => ['auth', 'es-administrador']], function () {
 Route::group(['middleware' => ['auth', 'es-gestor']], function () {
     Route::resource('ubicacion', UbicacionController::class);
     Route::resource('persona', PersonaController::class);
+    Route::resource('contratacion', ContratacionController::class);
 });
 
 
