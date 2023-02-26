@@ -17,8 +17,9 @@
     <br><br>
     <form method="GET">
         <div class="input-group mb-3">
-            <input type="text" name="query" value="{{ request()->get('query') }}" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="boton-buscar">
+            <input type="search" name="query" id="query" value="{{ request()->get('query') }}" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="boton-buscar">
             <button class="btn btn-outline-success" type="submit" id="boton-buscar">Buscar</button>
+            <button class="btn btn-outline-success" type="submit" id="boton-reset">Reset</button>
         </div>
     </form>
 
@@ -58,4 +59,16 @@
     {!! $contrataciones->links() !!}
     {{ 'Total registros: '. $contrataciones->total() }}
 </div>
+
+<script>
+    $(document).ready(function() {
+
+        $("#boton-reset").on('click', function(event) {
+            $('#query').val('');
+            $("#boton-buscar").click();
+        });
+
+    });
+</script>
+
 @endsection
