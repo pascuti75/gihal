@@ -81,3 +81,7 @@ php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
 
 **** Para el tema del control del acceso a las rutas por role se ha realizado por middleware
 ademas de un control con @if en el navbar
+
+
+
+***** he tenido que refinir la tabla tipos_producto. Tenia prolemas al eliminar el id estandar

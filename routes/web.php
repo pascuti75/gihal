@@ -14,6 +14,9 @@ use App\Http\Controllers\PersonaController;
 //Importamos la clase ContratacionController
 use App\Http\Controllers\ContratacionController;
 
+//Importamos la clase TipoEquipoController
+use App\Http\Controllers\TipoEquipoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,6 +63,7 @@ Route::group(['middleware' => ['auth', 'es-gestor']], function () {
     Route::resource('ubicacion', UbicacionController::class);
     Route::resource('persona', PersonaController::class);
     Route::resource('contratacion', ContratacionController::class);
+    Route::resource('tipo_equipo', TipoEquipoController::class);
 });
 
 
