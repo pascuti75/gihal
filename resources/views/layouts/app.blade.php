@@ -17,6 +17,8 @@
     <!-- estilos estaticos -->
     <link rel="stylesheet" type="text/css" href="{{ url('/css/app.css') }}">
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 </head>
