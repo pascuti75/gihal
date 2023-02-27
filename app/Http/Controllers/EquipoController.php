@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Equipo;
+use App\Models\TipoEquipo;
 use Illuminate\Support\Facades\Validator;
 
 // llamar a la referencia del modelo
@@ -34,8 +35,10 @@ class EquipoController extends Controller
     public function create()
     {
 
+        //para campo combo selector de tipo
+        $tipos  = TipoEquipo::all()->sortBy("tipo");
         //se redirige  a la vista /equipo/create
-        return view('equipo.create');
+        return view('equipo.create', compact('tipos'));
     }
 
     /**
@@ -87,7 +90,9 @@ class EquipoController extends Controller
     public function edit($id)
     {
         $equipo  = Equipo::findOrFail($id);
-        return view('equipo.edit', compact('equipo'));
+        //para campo combo selector de tipo
+        $tipos  = TipoEquipo::all()->sortBy("tipo");
+        return view('equipo.edit', compact('equipo', 'tipos'));
     }
 
     /**

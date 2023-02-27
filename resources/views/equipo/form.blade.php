@@ -49,10 +49,20 @@
         <label for="id_contratacion">Contratación:</label>
         <input type="text" class="form-control" name="id_contratacion" id="id_contratacion" value="{{ isset($equipo->id_contratacion)?$equipo->id_contratacion:old('id_contratacion') }}">
     </div>
-
+    <!--
     <div class="form-group">
         <label for="id_tipo_equipo">Tipo de equipo:</label>
         <input type="text" class="form-control" name="id_tipo_equipo" id="id_tipo_equipo" value="{{ isset($equipo->id_tipo_equipo)?$equipo->id_tipo_equipo:old('id_tipo_equipo') }}">
+    </div>
+-->
+    <div class="form-group">
+        <label for="id_tipo_equipo">Tipo de equipo:</label>
+        <select class="form-control" name="id_tipo_equipo" id="id_tipo_equipo">
+            <option value="option_select" disabled selected>Seleccionar</option>
+            @foreach ($tipos as $tipo)
+            <option value="{{$tipo->id}}" {{old('id') == $tipo->id ? 'selected' : ''}}>{{$tipo->tipo}}</option>
+            @endforeach
+        </select>
     </div>
 
 </fieldset>
