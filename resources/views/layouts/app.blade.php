@@ -58,7 +58,7 @@
                                 <a class="dropdown-item" href="{{ route('persona.index') }}">{{ __('Personas') }}</a>
                                 <a class="dropdown-item" href="{{ route('contratacion.index') }}">{{ __('Contrataciones') }}</a>
                                 <a class="dropdown-item" href="{{ route('tipo_equipo.index') }}">{{ __('Tipos de Equipo') }}</a>
-                                <a class="dropdown-item" href="#">Equipo</a>
+                                <a class="dropdown-item" href="{{ route('equipo.index') }}">{{ __('Equipos') }}</a>
                             </div>
                         </li>
                         @endif
