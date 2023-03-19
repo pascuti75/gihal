@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Equipo;
 use App\Models\TipoEquipo;
+use App\Models\Contratacion;
 use Illuminate\Support\Facades\Validator;
 
 // llamar a la referencia del modelo
@@ -37,8 +38,11 @@ class EquipoController extends Controller
 
         //para campo combo selector de tipo
         $tipos  = TipoEquipo::all()->sortBy("tipo");
+        //para campo combo selector de contratacion
+        $contrataciones  = Contratacion::all()->sortBy("titulo");
+
         //se redirige  a la vista /equipo/create
-        return view('equipo.create', compact('tipos'));
+        return view('equipo.create', compact(['tipos', 'contrataciones']));
     }
 
     /**

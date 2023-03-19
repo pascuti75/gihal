@@ -26,11 +26,15 @@
     </div>
 
 
-    <div class="form-group">
-        <label for="tipo_personal">Tipo:</label>
-        <input type="text" class="form-control" name="tipo_personal" id="tipo_personal" value="{{ isset($persona->tipo_personal)?$persona->tipo_personal:old('tipo_personal') }}">
+    <div class="col">
+        <div class="form-group">
+            <label for="tipo_personal">Tipo:</label>
+            <select class="form-select" name="tipo_personal" id="tipo_personal">
+                <option value="interno" {{ isset($persona->tipo_personal)&& $persona->tipo_personal=="interno"?'selected' : ''}}>interno</option>
+                <option value="externo" {{ isset($persona->tipo_personal)&& $persona->tipo_personal=="externo"?'selected' : ''}}>externo</option>
+            </select>
+        </div>
     </div>
-
 
 </fieldset>
 

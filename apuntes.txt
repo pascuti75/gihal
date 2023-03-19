@@ -83,5 +83,16 @@ php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
 ademas de un control con @if en el navbar
 
 
+**** agregados iconos boostrap al proyecto (AL FINAL NO LO HE UTILIZADO)
+https://stackoverflow.com/questions/75192944/does-laravel-9-supports-bootstrap-5-icons
+
+composer require twbs/bootstrap-icons
+
+@import '~twbs\bootstrap-icons\font\bootstrap-icons.css';
+
 
 ***** he tenido que refinir la tabla tipos_producto. Tenia prolemas al eliminar el id estandar
+
+
+
+-- Resolver problema con el formato de las fechas en las busquedas

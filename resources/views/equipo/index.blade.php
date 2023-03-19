@@ -13,7 +13,7 @@
 
 
 
-    <a href="{{ url('/equipo/create') }}" class="btn btn-success">Crear ubicación</a>
+    <a href="{{ url('/equipo/create') }}" class="btn btn-success">Crear equipo</a>
     <br><br>
     <form method="GET">
         <div class="input-group mb-3">
@@ -36,7 +36,7 @@
                 <th>Product Number</th>
                 <th>ID Contratacion</th>
                 <th>Tipo Equipo</th>
-                <th>Acciones</th>
+                <th class="action-column text-nowrap text-center"F>Acciones</th>
             </tr>
         </thead>
         <tbody>

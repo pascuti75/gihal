@@ -16,14 +16,14 @@ class Contratacion extends Model
     //fillable es para visualizar los campos de la tabla en las consultas sql
     protected $fillable = ['titulo', 'empresa', 'fecha_inicio', 'fecha_fin'];
 
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'fecha_inicio',
+        'fecha_fin'
+    ];
 
-
-     //campos que se van a utilizar en la busqueda
+    //campos que se van a utilizar en la busqueda
     public function toSearchableArray()
     {
         return [

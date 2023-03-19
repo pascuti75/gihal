@@ -51,7 +51,7 @@
                         @if(Auth::user()->es_gestor)
                         <li class="nav-item dropdown">
                             <a id="navbarGestion" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Gestión
+                                Gestiones
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarGestion">
                                 <a class="dropdown-item" href="{{ route('ubicacion.index') }}">{{ __('Ubicaciones') }}</a>

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
 
     <h1 class="text-center">GESTIÓN DE CONTRATACIONES</h1>
@@ -27,12 +28,12 @@
 
         <thead class="thead-light">
             <tr>
-                <th>#</th>
-                <th>Título</th>
-                <th>Empresa</th>
-                <th>Fecha Inicio</th>
-                <th>Fecha Fin</th>
-                <th>Acciones</th>
+                <th class="text-center">#</th>
+                <th class="text-left">Título</th>
+                <th class="text-left">Empresa</th>
+                <th class="text-center" style="width:100px;">Fecha Inicio</th>
+                <th class="text-center" style="width:100px;">Fecha Fin</th>
+                <th class="action-column text-nowrap text-center">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -41,9 +42,9 @@
                 <td>{{ $contratacion->id }}</td>
                 <td>{{ $contratacion->titulo }}</td>
                 <td>{{ $contratacion->empresa }}</td>
-                <td>{{ $contratacion->fecha_inicio }}</td>
-                <td>{{ $contratacion->fecha_fin }}</td>
-                <td>
+                <td class="text-center">{{ date('d/m/Y',strtotime($contratacion->fecha_inicio)) }} </td>
+                <td class="text-center">{{ date('d/m/Y',strtotime($contratacion->fecha_fin)) }}</td>
+                <td class="text-center">
                     <a href="{{ url('/contratacion/'.$contratacion->id.'/edit')}}" class="btn btn-sm btn-warning">editar</a>
                     |
                     <form action="{{ url('/contratacion/'.$contratacion->id)}}" class="d-inline" method="post">
