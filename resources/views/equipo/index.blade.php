@@ -34,9 +34,9 @@
                 <th>Cod.Externo</th>
                 <th>Num.Serie</th>
                 <th>Product Number</th>
-                <th>ID Contratacion</th>
-                <th>Tipo Equipo</th>
-                <th class="action-column text-nowrap text-center" F>Acciones</th>
+                <th class="text-center">Contrato</th>
+                <th class="text-center">Tipo Equipo</th>
+                <th class="action-column text-nowrap text-center">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -49,9 +49,15 @@
                 <td>{{ $equipo->cod_externo }}</td>
                 <td>{{ $equipo->num_serie }}</td>
                 <td>{{ $equipo->product_number }}</td>
-                <td>{{ $equipo->id_contratacion }}</td>
-                <td>{{ $equipo->tipoEquipo->tipo }}</td>
-                <td>
+                <td class="text-center">
+                    @if ($equipo->id_contratacion!=null)
+                    <a class="btn btn-sm btn-outline-secondary" href="#" data-toggle="tooltip" title="{{ $equipo->contratacion->empresa.': '.$equipo->contratacion->titulo . 
+                        '   Fecha Inicio: '. date('d/m/Y',strtotime($equipo->contratacion->fecha_inicio)) . '   Fecha Fin: '. 
+                        date('d/m/Y',strtotime($equipo->contratacion->fecha_fin))}}">ver</a>
+                    @endif
+                </td>
+                <td class="text-center">{{ $equipo->tipoEquipo->tipo }}</td>
+                <td class="action-column text-nowrap text-center">
                     <a href="{{ url('/equipo/'.$equipo->id.'/edit')}}" class="btn btn-sm btn-warning">editar</a>
                     |
                     <form action="{{ url('/equipo/'.$equipo->id)}}" class="d-inline" method="post">
@@ -67,7 +73,6 @@
     {!! $equipos->links() !!}
     {{ 'Total registros: '. $equipos->total() }}
 
-    <pre>{{var_dump($equipos[0]);}}</pre>
 </div>
 
 <script>
@@ -77,6 +82,8 @@
             $('#query').val('');
             $("#boton-buscar").click();
         });
+
+        $('[data-toggle="tooltip"]').tooltip();
 
     });
 </script>
