@@ -96,7 +96,9 @@ class EquipoController extends Controller
         $equipo  = Equipo::findOrFail($id);
         //para campo combo selector de tipo
         $tipos  = TipoEquipo::all()->sortBy("tipo");
-        return view('equipo.edit', compact('equipo', 'tipos'));
+        //para campo combo selector de contratacion
+        $contrataciones  = Contratacion::all()->sortBy("titulo");
+        return view('equipo.edit', compact('equipo', 'tipos', 'contrataciones'));
     }
 
     /**

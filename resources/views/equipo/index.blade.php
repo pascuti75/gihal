@@ -36,7 +36,7 @@
                 <th>Product Number</th>
                 <th>ID Contratacion</th>
                 <th>Tipo Equipo</th>
-                <th class="action-column text-nowrap text-center"F>Acciones</th>
+                <th class="action-column text-nowrap text-center" F>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -50,7 +50,7 @@
                 <td>{{ $equipo->num_serie }}</td>
                 <td>{{ $equipo->product_number }}</td>
                 <td>{{ $equipo->id_contratacion }}</td>
-                <td>{{ $equipo->id_tipo_equipo }}</td>
+                <td>{{ $equipo->tipoEquipo->tipo }}</td>
                 <td>
                     <a href="{{ url('/equipo/'.$equipo->id.'/edit')}}" class="btn btn-sm btn-warning">editar</a>
                     |
@@ -66,6 +66,8 @@
     </table>
     {!! $equipos->links() !!}
     {{ 'Total registros: '. $equipos->total() }}
+
+    <pre>{{var_dump($equipos[0]);}}</pre>
 </div>
 
 <script>

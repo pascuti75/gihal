@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
 
 class TipoEquipo extends Model
@@ -16,11 +17,13 @@ class TipoEquipo extends Model
     //fillable es para visualizar los campos de la tabla en las consultas sql
     protected $fillable = ['cod_tipo_equipo', 'tipo'];
 
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
+
+
+    //Relacion con equipos
+    public function equipos(): HasMany
+    {
+        return $this->hasMany(Equipo::class);
+    }
 
 
     //campos que se van a utilizar en la busqueda

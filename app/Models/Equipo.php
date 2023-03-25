@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Scout\Searchable;
 
 class Equipo extends Model
@@ -19,13 +20,18 @@ class Equipo extends Model
         'product_number', 'num_serie', 'id_contratacion', 'id_tipo_equipo'
     ];
 
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
 
+    //Relacion con tipo de equipo
 
+    //public function tipoEquipo(): BelongsTo
+    //{
+    //    return $this->belongsTo(TipoEquipo::class);
+    //}
+
+    public function tipoEquipo()
+    {
+        return $this->hasOne(TipoEquipo::class,'id', 'id_tipo_equipo');
+    }
     //campos que se van a utilizar en la busqueda
     public function toSearchableArray()
     {
