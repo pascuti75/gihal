@@ -46,10 +46,10 @@
                 <td>{{ isset($operacion->id_ubicacion) ? $operacion->ubicacion->servicio .' - '. $operacion->ubicacion->dependencia : '' }}</td>
                 <td>{{ isset($operacion->id_user) ? $operacion->user->username : '' }}</td>
                 <td class="action-column text-nowrap text-center">
-                    <a href="{{ url('/operacion/'.$operacion->id.'/instalar')}}" class="btn btn-sm btn-warning">ins</a>
-                    <a href="{{ url('/operacion/'.$operacion->id.'/edit')}}" class="btn btn-sm btn-warning">alm</a>
+                    <a href="{{ url('/operacion/'.$operacion->id.'/instalar')}}" class="btn btn-sm btn-primary">ins</a>
+                    <a href="{{ url('/operacion/'.$operacion->id.'/edit')}}" class="btn btn-sm btn-success">alm</a>
                     <a href="{{ url('/operacion/'.$operacion->id.'/edit')}}" class="btn btn-sm btn-warning">rep</a>
-                    <a href="{{ url('/operacion/'.$operacion->id.'/edit')}}" class="btn btn-sm btn-warning">baja</a>
+                    <a href="{{ url('/operacion/'.$operacion->id.'/edit')}}" class="btn btn-sm btn-danger">baja</a>
                 </td>
             </tr>
             @endforeach

@@ -3,7 +3,11 @@
 @section('content')
 <div class="container">
 
-    en instalar
+    <form action="{{url('/operacion/'.$operacion->id)}}" method="post">
+        @csrf
+        {{ method_field('PATCH') }}
+        @include('operacion.form', ['tipo'=>'instalacion'])
+    </form>
 
 </div>
 
