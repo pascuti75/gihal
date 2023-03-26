@@ -20,6 +20,9 @@ use App\Http\Controllers\TipoEquipoController;
 //Importamos la clase EquipoController
 use App\Http\Controllers\EquipoController;
 
+//Importamos la clase OperacionController
+use App\Http\Controllers\OperacionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,11 +71,15 @@ Route::group(['middleware' => ['auth', 'es-gestor']], function () {
     Route::resource('contratacion', ContratacionController::class);
     Route::resource('tipo_equipo', TipoEquipoController::class);
     Route::resource('equipo', EquipoController::class);
+    Route::resource('operacion', OperacionController::class);
+    Route::get('/operacion/{id}/instalar', [OperacionController::class, 'edit']);
 });
 
 
 //restriccion de acceso a routes por usuario autententicado y permiso esTecnico
 Route::group(['middleware' => ['auth', 'es-tecnico']], function () {
+    Route::resource('operacion', OperacionController::class);
+    Route::get('/operacion/{id}/instalar', [OperacionController::class, 'edit']);
 });
 
 //restriccion de acceso a routes por usuario autententicado y permiso esConsultor

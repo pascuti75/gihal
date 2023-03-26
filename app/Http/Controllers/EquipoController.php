@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Equipo;
 use App\Models\TipoEquipo;
 use App\Models\Contratacion;
+use App\Models\Operacion;
 use Illuminate\Support\Facades\Validator;
 
 // llamar a la referencia del modelo
@@ -74,9 +75,18 @@ class EquipoController extends Controller
 
         $this->validate($request, $campos, $mensaje);
 
-
         $equipo  = new Equipo($request->all());
         $equipo->save();
+
+        //creamos la operacion de almacenaje asociada a a creacion del equipo
+        $operacion  = new Operacion();
+        $operacion->fecha_operacion = now()->format('Y-m-d H:i:s');
+        $operacion->tipo_operacion = 'almacenaje';
+        $operacion->id_equipo = $equipo->id;
+        $operacion->id_ubicacion = 1; //la ubicacion 1 siempre debe de ser el almacen
+        $operacion->save();
+
+
         return redirect()->action([EquipoController::class, 'index'])->with('mensaje', 'El equipo se ha creado correctamente');
     }
 

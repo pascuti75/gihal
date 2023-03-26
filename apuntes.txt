@@ -93,6 +93,13 @@ composer require twbs/bootstrap-icons
 
 ***** he tenido que refinir la tabla tipos_producto. Tenia prolemas al eliminar el id estandar
 
+***** he agregado nuevo campo activa a la tabla de operaciones para distinguir cua es la ultima operacion activa para el equipo
+
+**** hay que insertar por defecto en el script de la instalacion de la aplicacion la ubicacion 1 por defecto informatica ("almacen")
+
+**** por defecto se ha modificado que tanto el tecnico como la ubicacion sea nullable (opcional)
+
+**** voy a eliminar la opcion de reubicar y vamos a utilizar siempre instalar ya que produce redundancia
 
 
 -- Resolver problema con el formato de las fechas en las busquedas

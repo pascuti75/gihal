@@ -64,7 +64,7 @@
                         @endif
                         @if(Auth::user()->es_tecnico)
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('ubicacion.index') }}">{{ __('Operaciones') }}</a>
+                            <a class="nav-link" href="{{ route('operacion.index') }}">{{ __('Operaciones') }}</a>
                         </li>
                         @endif
                         @if(Auth::user()->es_consultor)
