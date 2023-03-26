@@ -47,22 +47,46 @@ class OperacionController extends Controller
 
     public function update(Request $request, $id)
     {
+        $mensaje = "";
+        $error = "";
 
-        $operacion_actual  = Operacion::findOrFail($id);
-        //marcamos la operacion actual como no activa para que no se muestre
-        $operacion_actual->activa = "no";
-        $operacion_actual->save();
+        $operacion_anterior  = Operacion::findOrFail($id);
+        //si el equipo ya está en baja no podemos hacer ninguna operacion
+        if ($operacion_anterior->tipo_operacion == "baja") {
+            $error = "No se puede realizar una operación sobre un equipo dado de baja";
+        } else {
+            //marcamos la operacion actual como no activa para que no se muestre
+            $operacion_anterior->activa = "no";
+            $operacion_anterior->save();
 
-        //creamos la nueva operacion
-        $operacion  = new Operacion();
-        $operacion->fecha_operacion = now()->format('Y-m-d H:i:s');
-        $operacion->tipo_operacion = $request->tipo_operacion;
-        $operacion->id_equipo = $request->id_equipo;
-        $operacion->id_persona = $request->id_persona;
-        $operacion->id_ubicacion = $request->id_ubicacion;
-        $operacion->id_user = $request->id_user;
-        $operacion->save();
+            //creamos la nueva operacion
+            $operacion  = new Operacion();
+            $operacion->fecha_operacion = now()->format('Y-m-d H:i:s');
+            $operacion->tipo_operacion = $request->tipo_operacion;
 
-        return redirect()->action([OperacionController::class, 'index'])->with('mensaje', 'Operación realizada correctamente');
+            if ($request->tipo_operacion == "instalacion") {
+                $operacion->id_equipo = $request->id_equipo;
+                $operacion->id_persona = $request->id_persona;
+                $operacion->id_ubicacion = $request->id_ubicacion;
+                $operacion->id_user = $request->id_user;
+                $operacion->save();
+            } elseif ($request->tipo_operacion == "almacenaje") {
+                $operacion->id_equipo = $operacion_anterior->id_equipo;
+                $operacion->id_persona = null;
+                $operacion->id_ubicacion = 1;
+                $operacion->id_user = auth()->user()->id;
+                $operacion->save();
+            } elseif (in_array($request->tipo_operacion, ["reparacion", "baja"])) {
+                $operacion->id_equipo = $operacion_anterior->id_equipo;
+                $operacion->id_persona = $operacion_anterior->id_persona;
+                $operacion->id_ubicacion = $operacion_anterior->id_ubicacion;
+                $operacion->id_user = auth()->user()->id;
+                $operacion->save();
+            }
+
+            $mensaje = "Operación realizada correctamente";
+        }
+
+        return redirect()->action([OperacionController::class, 'index'])->with('mensaje', $mensaje)->with('error', $error);;
     }
 }

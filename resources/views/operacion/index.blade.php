@@ -5,9 +5,14 @@
 
     <h1 class="text-center">OPERACIONES</h1>
 
-    @if(Session::has('mensaje'))
+    @if(Session::has('mensaje') && Session::get('mensaje')!=="")
     <div class="alert alert-success" role="alert">
         {{ Session::get('mensaje') }}
+    </div>
+    @endif
+    @if(Session::has('error') && Session::get('error')!=="")
+    <div class="alert alert-danger" role="alert">
+        {{ Session::get('error') }}
     </div>
     @endif
 
@@ -46,10 +51,27 @@
                 <td>{{ isset($operacion->id_ubicacion) ? $operacion->ubicacion->servicio .' - '. $operacion->ubicacion->dependencia : '' }}</td>
                 <td>{{ isset($operacion->id_user) ? $operacion->user->username : '' }}</td>
                 <td class="action-column text-nowrap text-center">
+                    @if($operacion->tipo_operacion!=="baja")
                     <a href="{{ url('/operacion/'.$operacion->id.'/instalar')}}" class="btn btn-sm btn-primary">ins</a>
-                    <a href="{{ url('/operacion/'.$operacion->id.'/edit')}}" class="btn btn-sm btn-success">alm</a>
-                    <a href="{{ url('/operacion/'.$operacion->id.'/edit')}}" class="btn btn-sm btn-warning">rep</a>
-                    <a href="{{ url('/operacion/'.$operacion->id.'/edit')}}" class="btn btn-sm btn-danger">baja</a>
+                    <form action="{{ url('/operacion/'.$operacion->id)}}" class="d-inline" method="post">
+                        @csrf
+                        {{ method_field('PATCH') }}
+                        <input name="tipo_operacion" type="hidden" value="almacenaje">
+                        <input type="submit" class="btn btn-sm btn-success" onclick="return confirm('¿Quieres enviar el equipo al almacén?')" value="alm">
+                    </form>
+                    <form action="{{ url('/operacion/'.$operacion->id)}}" class="d-inline" method="post">
+                        @csrf
+                        {{ method_field('PATCH') }}
+                        <input name="tipo_operacion" type="hidden" value="reparacion">
+                        <input type="submit" class="btn btn-sm btn-warning" onclick="return confirm('¿Quieres enviar el equipo a reparación')" value="rep">
+                    </form>
+                    <form action="{{ url('/operacion/'.$operacion->id)}}" class="d-inline" method="post">
+                        @csrf
+                        {{ method_field('PATCH') }}
+                        <input name="tipo_operacion" type="hidden" value="baja">
+                        <input type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Quieres dar de baja al equipo')" value="baja">
+                    </form>
+                    @endif
                 </td>
             </tr>
             @endforeach
