@@ -23,6 +23,9 @@ use App\Http\Controllers\EquipoController;
 //Importamos la clase OperacionController
 use App\Http\Controllers\OperacionController;
 
+//Importamos la clase ConsultaController
+use App\Http\Controllers\ConsultaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -84,6 +87,7 @@ Route::group(['middleware' => ['auth', 'es-tecnico']], function () {
 
 //restriccion de acceso a routes por usuario autententicado y permiso esConsultor
 Route::group(['middleware' => ['auth', 'es-consultor']], function () {
+    Route::get('/consulta', [ConsultaController::class, 'index'])->name('consulta.index');
 });
 
 

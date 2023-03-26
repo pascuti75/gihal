@@ -69,7 +69,7 @@
                         @endif
                         @if(Auth::user()->es_consultor)
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('ubicacion.index') }}">{{ __('Consultas') }}</a>
+                            <a class="nav-link" href="{{ route('consulta.index') }}">{{ __('Consultas') }}</a>
                         </li>
                         @endif
                     </ul>

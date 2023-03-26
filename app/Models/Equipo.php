@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
 
 class Equipo extends Model
@@ -29,6 +30,12 @@ class Equipo extends Model
     public function contratacion()
     {
         return $this->hasOne(Contratacion::class, 'id', 'id_contratacion');
+    }
+
+    //Relacion con operaciones
+    public function operaciones(): HasMany
+    {
+        return $this->hasMany(Operacion::class);
     }
 
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Scout\Searchable;
 
 class Operacion extends Model
@@ -20,22 +21,22 @@ class Operacion extends Model
     ];
 
 
-    public function equipo()
+    public function equipo(): HasOne
     {
         return $this->hasOne(Equipo::class, 'id', 'id_equipo');
     }
 
-    public function ubicacion()
+    public function ubicacion(): HasOne
     {
         return $this->hasOne(Ubicacion::class, 'id', 'id_ubicacion');
     }
 
-    public function persona()
+    public function persona(): HasOne
     {
         return $this->hasOne(Persona::class, 'id', 'id_persona');
     }
 
-    public function user()
+    public function user(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'id_user');
     }
@@ -45,13 +46,7 @@ class Operacion extends Model
     {
         return [
             'tipo_operacion' => $this->tipo_operacion,
-            'fecha_operacion' => $this->fecha_operacion,
-            'id_equipo' => $this->id_equipo,
-            'id_ubicacion' => $this->id_ubicacion,
-            'id_persona' => $this->id_persona,
-            'id_user' => $this->id_user,
-            // 'equipo.cod_interno' => $this->equipo->cod_interno
-
+            'fecha_operacion' => $this->fecha_operacion
         ];
     }
 }

@@ -30,6 +30,7 @@ class OperacionController extends Controller
     }
 
 
+
     public function edit($id)
     {
         $operacion  = Operacion::findOrFail($id);
