@@ -19,9 +19,9 @@ class OperacionController extends Controller
         $search_param = $request->query('query');
 
         if ($search_param) {
-            $operaciones_query = Operacion::search($search_param)->orderBy('id', 'asc')->paginate(5);
+            $operaciones_query = Operacion::search($search_param)->where('activa', 'si')->orderBy('id', 'desc')->paginate(5);
         } else {
-            $operaciones_query = Operacion::orderBy('id', 'asc')->paginate(5);
+            $operaciones_query = Operacion::where('activa', 'si')->orderBy('id', 'desc')->paginate(5);
         }
 
         $operaciones = $operaciones_query;
@@ -54,7 +54,6 @@ class OperacionController extends Controller
         $operacion_actual->save();
 
         //creamos la nueva operacion
-
         $operacion  = new Operacion();
         $operacion->fecha_operacion = now()->format('Y-m-d H:i:s');
         $operacion->tipo_operacion = $request->tipo_operacion;
@@ -65,9 +64,5 @@ class OperacionController extends Controller
         $operacion->save();
 
         return redirect()->action([OperacionController::class, 'index'])->with('mensaje', 'Operación realizada correctamente');
-
-
-        echo ($request->tipo_operacion);
-        echo ($request->id_persona);
     }
 }
