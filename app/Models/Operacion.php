@@ -54,6 +54,16 @@ class Operacion extends Model
 
     //Query scope
 
+    public function scopeCodInterno($query, $cod_interno)
+    {
+        if ($cod_interno) {
+            return $query->whereHas('equipo', function ($query) use ($cod_interno) {
+                $query->where('cod_interno', 'LIKE', "$cod_interno%");
+            });
+        }
+    }
+
+
     public function scopeTipoOperacion($query, $tipo_operacion)
     {
         if ($tipo_operacion) {
@@ -65,6 +75,28 @@ class Operacion extends Model
     {
         if ($activa && $activa == 'on') {
             return $query->where('activa', 'LIKE', "si");
+        }
+    }
+
+
+    public function scopeTecnico($query, $tecnico)
+    {
+        if ($tecnico) {
+            return $query->whereHas('user', function ($query) use ($tecnico) {
+                $query->where('username', 'LIKE', "$tecnico%");
+            });
+        }
+    }
+
+
+    public function scopeTipoEquipo($query, $tipo_equipo)
+    {
+        if ($tipo_equipo) {
+            return $query->whereHas('equipo', function ($query) use ($tipo_equipo) {
+                $query->whereHas('tipoEquipo', function ($query) use ($tipo_equipo) {
+                    $query->where('tipo', 'LIKE', "$tipo_equipo%");
+                });
+            });
         }
     }
 }

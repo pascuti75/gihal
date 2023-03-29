@@ -16,11 +16,17 @@ class ConsultaController extends Controller
     {
         $tipo_operacion = $request->get('tipo_operacion');
         $activa = $request->get('activa');
+        $tecnico = $request->get('tecnico');
+        $cod_interno = $request->get('cod_interno');
+        $tipo_equipo = $request->get('tipo_equipo');
 
 
         $operaciones = Operacion::orderBy('id', 'desc')
+            ->codInterno($cod_interno)
             ->tipoOperacion($tipo_operacion)
-            ->activa($tipo_operacion)
+            ->tecnico($tecnico)
+            ->tipoEquipo($tipo_equipo)
+            //->activa($tipo_operacion)
             ->paginate(5);
         return view('consulta.index', compact('operaciones'));
     }
