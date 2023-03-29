@@ -14,7 +14,14 @@ class ConsultaController extends Controller
 
     public function index(Request $request)
     {
-        $operaciones = Operacion::orderBy('id', 'desc')->paginate(5);
+        $tipo_operacion = $request->get('tipo_operacion');
+        $activa = $request->get('activa');
+
+
+        $operaciones = Operacion::orderBy('id', 'desc')
+            ->tipoOperacion($tipo_operacion)
+            ->activa($tipo_operacion)
+            ->paginate(5);
         return view('consulta.index', compact('operaciones'));
     }
 }

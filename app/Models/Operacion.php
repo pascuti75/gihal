@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Scout\Searchable;
 
+use function PHPUnit\Framework\returnCallback;
+
 class Operacion extends Model
 {
     use HasFactory, Searchable;
@@ -48,5 +50,21 @@ class Operacion extends Model
             'tipo_operacion' => $this->tipo_operacion,
             'fecha_operacion' => $this->fecha_operacion
         ];
+    }
+
+    //Query scope
+
+    public function scopeTipoOperacion($query, $tipo_operacion)
+    {
+        if ($tipo_operacion) {
+            return $query->where('tipo_operacion', 'LIKE', "%$tipo_operacion%");
+        }
+    }
+
+    public function scopeActiva($query, $activa)
+    {
+        if ($activa && $activa == 'on') {
+            return $query->where('activa', 'LIKE', "si");
+        }
     }
 }
