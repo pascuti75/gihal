@@ -27,7 +27,8 @@ class ConsultaController extends Controller
             ->tecnico($tecnico)
             ->tipoEquipo($tipo_equipo)
             //->activa($tipo_operacion)
-            ->paginate(5);
+            ->paginate(5)
+            ->withQueryString();
         return view('consulta.index', compact('operaciones'));
     }
 }
