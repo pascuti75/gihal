@@ -10,3 +10,15 @@
     white-space: pre-wrap;
     min-width: 100px;
 }
+
+
+footer {
+    background-color: #2b2b33;
+    color: #fff;
+}
+
+.gihal-name {
+    padding: 30px 30px 0px 30px;
+    
+    font-size: 2rem;
+}

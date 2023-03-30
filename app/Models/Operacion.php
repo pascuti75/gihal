@@ -58,7 +58,7 @@ class Operacion extends Model
     {
         if ($cod_interno) {
             return $query->whereHas('equipo', function ($query) use ($cod_interno) {
-                $query->where('cod_interno', 'LIKE', "$cod_interno%");
+                $query->where('cod_interno', 'LIKE', "%$cod_interno%");
             });
         }
     }
@@ -67,9 +67,10 @@ class Operacion extends Model
     public function scopeTipoOperacion($query, $tipo_operacion)
     {
         if ($tipo_operacion) {
-            return $query->where('tipo_operacion', 'LIKE', "%$tipo_operacion%");
+            return $query->where('tipo_operacion', 'LIKE', "$tipo_operacion");
         }
     }
+
 
     public function scopeActiva($query, $activa)
     {
@@ -83,7 +84,17 @@ class Operacion extends Model
     {
         if ($tecnico) {
             return $query->whereHas('user', function ($query) use ($tecnico) {
-                $query->where('username', 'LIKE', "$tecnico%");
+                $query->where('id', 'LIKE', "$tecnico");
+            });
+        }
+    }
+
+
+    public function scopePersona($query, $persona)
+    {
+        if ($persona) {
+            return $query->whereHas('persona', function ($query) use ($persona) {
+                $query->where('id', 'LIKE', "$persona");
             });
         }
     }
@@ -93,8 +104,28 @@ class Operacion extends Model
     {
         if ($tipo_equipo) {
             return $query->whereHas('equipo', function ($query) use ($tipo_equipo) {
-                $query->whereHas('tipoEquipo', function ($query) use ($tipo_equipo) {
-                    $query->where('tipo', 'LIKE', "$tipo_equipo%");
+                $query->where('id_tipo_equipo', 'LIKE', "$tipo_equipo");
+            });
+        }
+    }
+
+
+    public function scopeUbicacion($query, $ubicacion)
+    {
+        if ($ubicacion) {
+            return $query->whereHas('ubicacion', function ($query) use ($ubicacion) {
+                $query->where('id', 'LIKE', "$ubicacion");
+            });
+        }
+    }
+
+
+    public function scopeContratacion($query, $contratacion)
+    {
+        if ($contratacion) {
+            return $query->whereHas('equipo', function ($query) use ($contratacion) {
+                $query->whereHas('contratacion', function ($query) use ($contratacion) {
+                    $query->where('id', 'LIKE', "$contratacion");
                 });
             });
         }

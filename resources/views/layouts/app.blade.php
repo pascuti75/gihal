@@ -14,6 +14,8 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- estilos estaticos -->
     <link rel="stylesheet" type="text/css" href="{{ url('/css/app.css') }}">
     <!-- Scripts -->
@@ -27,9 +29,14 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    GIHAL
+
+                <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+                    <img class="me-2" src="./images/logo.png" width="50" height="50" alt="">
+                    <span class="h2 m-0">
+                        GIHAL
+                    </span>
                 </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -112,11 +119,16 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>
     </div>
 </body>
+<footer class="text-center text-lg-start fixed-bottom">
+
+    <div class="text-center p-3">
+        © 2023 GIHAL. Gestión de Inventario Hardware para Admininistraciones Locales.
+    </div>
+</footer>
 
 </html>
