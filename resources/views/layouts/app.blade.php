@@ -16,10 +16,17 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+
     <!-- estilos estaticos -->
     <link rel="stylesheet" type="text/css" href="{{ url('/css/app.css') }}">
+    <!-- campos de tipo calendario-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <!-- Scripts -->
     <script src="{{ url('/scripts/jquery-3.6.3/jquery-3.6.3.min.js')}}"></script>
+    <!-- campos de tipo calendario-->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 

@@ -37,7 +37,10 @@
                 <div class="form-group row mb-2">
 
                     <div class="col-md-2">
-                        <input type="text" id="f_oper_ini" name="f_oper_ini" placeholder="Fecha Ini. Operación" class="form-control">
+                        <div class="input-group">
+                            <input type="text" id="f_oper_ini" name="f_oper_ini" placeholder="Desde fecha operación..." class="form-control campo_fecha">
+                            <button class="btn btn-outline-secondary" type="button" id="reset_f_oper_ini"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <select class="form-select" name="tipo_operacion" id="tipo_operacion">
@@ -61,7 +64,10 @@
                 <div class="form-group row mb-2">
 
                     <div class="col-md-2">
-                        <input type="text" id="f_oper_fin" name="f_oper_fin" placeholder="Fecha Fin Operación" class="form-control">
+                        <div class="input-group">
+                            <input type="text" id="f_oper_fin" name="f_oper_fin" placeholder="Hasta fecha operación..." class="form-control campo_fecha">
+                            <button class="btn btn-outline-secondary" type="button" id="reset_f_oper_fin"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <select class="form-select" name="tipo_equipo" id="tipo_equipo">
@@ -157,6 +163,24 @@
     </div>
 
 </div>
+
+<script>
+    $(document).ready(function() {
+
+        $(".campo_fecha").flatpickr({
+            locale: "es"
+        });
+    });
+
+
+    $('#reset_f_oper_ini').click(function() {
+        $('#f_oper_ini').val('');
+    });
+
+    $('#reset_f_oper_fin').click(function() {
+        $('#f_oper_fin').val('');
+    });
+</script>
 
 
 @endsection
