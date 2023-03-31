@@ -5,7 +5,6 @@
 
     <h1 class="text-center">CONSULTAS</h1>
 
-
     <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
         <i class="fa fa-chevron-down"></i> Mostrar/Ocultar Filtros
     </button>
@@ -90,10 +89,20 @@
                 <div class="form-group row mb-2">
 
                     <div class="col-md-2">
-                        <input type="text" id="marca" name="marca" placeholder="Marca" class="form-control">
+                        <select class="form-select" name="marca" id="marca">
+                            <option value="">-- Marca --</option>
+                            @foreach ($marcas as $marca)
+                            <option value="{{$marca}}">{{$marca}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" id="modelo" name="modelo" placeholder="Modelo" class="form-control">
+                        <select class="form-select" name="modelo" id="modelo">
+                            <option value="">-- Modelo --</option>
+                            @foreach ($modelos as $modelo)
+                            <option value="{{$modelo}}">{{$modelo}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-3">
                         <input type="text" id="product_number" name="product_number" placeholder="Product Number" class="form-control">
@@ -170,15 +179,15 @@
         $(".campo_fecha").flatpickr({
             locale: "es"
         });
-    });
 
+        $('#reset_f_oper_ini').click(function() {
+            $('#f_oper_ini').val('');
+        });
 
-    $('#reset_f_oper_ini').click(function() {
-        $('#f_oper_ini').val('');
-    });
+        $('#reset_f_oper_fin').click(function() {
+            $('#f_oper_fin').val('');
+        });
 
-    $('#reset_f_oper_fin').click(function() {
-        $('#f_oper_fin').val('');
     });
 </script>
 

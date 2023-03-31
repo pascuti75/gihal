@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Scout\Searchable;
+use Carbon\Carbon;
 
 use function PHPUnit\Framework\returnCallback;
 
@@ -127,6 +128,58 @@ class Operacion extends Model
                 $query->whereHas('contratacion', function ($query) use ($contratacion) {
                     $query->where('id', 'LIKE', "$contratacion");
                 });
+            });
+        }
+    }
+
+
+    public function scopeFOperIni($query, $f_oper_ini)
+    {
+        if ($f_oper_ini) {
+            return $query->where('fecha_operacion', '>=', $f_oper_ini);
+        }
+    }
+
+
+    public function scopeFOperFin($query, $f_oper_fin)
+    {
+        if ($f_oper_fin) {
+            return $query->where('fecha_operacion', '<', Carbon::parse($f_oper_fin)->addDay());
+        }
+    }
+
+    public function scopeMarca($query, $marca)
+    {
+        if ($marca) {
+            return $query->whereHas('equipo', function ($query) use ($marca) {
+                $query->where('marca', 'LIKE', "$marca");
+            });
+        }
+    }
+
+    public function scopeModelo($query, $modelo)
+    {
+        if ($modelo) {
+            return $query->whereHas('equipo', function ($query) use ($modelo) {
+                $query->where('modelo', 'LIKE', "$modelo");
+            });
+        }
+    }
+
+    public function scopeNumSerie($query, $num_serie)
+    {
+        if ($num_serie) {
+            return $query->whereHas('equipo', function ($query) use ($num_serie) {
+                $query->where('num_serie', 'LIKE', "%$num_serie%");
+            });
+        }
+    }
+
+    public function scopeProductNumber($query, $product_number)
+    {
+        if ($product_number) {
+            return $query->whereHas('equipo', function ($query) use ($product_number) {
+                $query->where('product_number', 'LIKE', "%$product_number%");
             });
         }
     }
