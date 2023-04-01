@@ -8,7 +8,6 @@
     <div class="alert alert-danger" role="alert">
         <ul>
             @foreach( $errors->all() as $error)
-
             <li> {{ $error }} </li>
             @endforeach
         </ul>
@@ -27,12 +26,18 @@
 
     <div class="form-group">
         <label for="fecha_inicio">Fecha Inicio:</label>
-        <input type="text" class="form-control" name="fecha_inicio" id="fecha_inicio" value="{{ isset($contratacion->fecha_inicio)?$contratacion->fecha_inicio:old('fecha_inicio') }}">
+        <div class="input-group">
+            <input type="text" class="form-control campo_fecha" name="fecha_inicio" id="fecha_inicio" value="{{ isset($contratacion->fecha_inicio)?$contratacion->fecha_inicio:old('fecha_inicio') }}">
+            <button class="btn btn-outline-secondary" type="button" id="reset_fecha_inicio"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
     </div>
 
     <div class="form-group">
         <label for="fecha_fin">Fecha Fin:</label>
-        <input type="text" class="form-control" name="fecha_fin" id="fecha_fin" value="{{ isset($contratacion->fecha_fin)?$contratacion->fecha_fin:old('fecha_fin') }}">
+        <div class="input-group">
+            <input type="text" class="form-control campo_fecha" name="fecha_fin" id="fecha_fin" value="{{ isset($contratacion->fecha_fin)?$contratacion->fecha_fin:old('fecha_fin') }}">
+            <button class="btn btn-outline-secondary" type="button" id="reset_fecha_fin"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
     </div>
 
 
@@ -42,3 +47,9 @@
 <br>
 <input type="submit" class="btn btn-success" value="Aceptar">
 <a href="{{ url('/contratacion') }}" class="btn btn-primary">Cancelar</a>
+
+<script>
+    $(document).ready(function() {
+        initContratacionForm();
+    });
+</script>

@@ -28,56 +28,57 @@
         </div>
     </form>
 
-    <table class="table table-light">
+    <div class="card card-body">
+        <table class="table table-light">
 
-        <thead class="thead-light">
-            <tr>
-                <th>#</th>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Cod.Interno</th>
-                <th>Cod.Externo</th>
-                <th>Num.Serie</th>
-                <th>Product Number</th>
-                <th class="text-center">Contrato</th>
-                <th class="text-center">Tipo Equipo</th>
-                <th class="action-column text-nowrap text-center">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach( $equipos as $equipo)
-            <tr>
-                <td>{{ $equipo->id }}</td>
-                <td>{{ $equipo->marca }}</td>
-                <td>{{ $equipo->modelo }}</td>
-                <td>{{ $equipo->cod_interno }}</td>
-                <td>{{ $equipo->cod_externo }}</td>
-                <td>{{ $equipo->num_serie }}</td>
-                <td>{{ $equipo->product_number }}</td>
-                <td class="text-center">
-                    @if ($equipo->id_contratacion!=null)
-                    <a class="btn btn-sm btn-outline-secondary" href="#" data-toggle="tooltip" title="{{ $equipo->contratacion->empresa.': '.$equipo->contratacion->titulo . 
+            <thead class="thead-light">
+                <tr>
+                    <th>#</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Cod.Interno</th>
+                    <th>Cod.Externo</th>
+                    <th>Num.Serie</th>
+                    <th>Product Number</th>
+                    <th class="text-center">Contrato</th>
+                    <th class="text-center">Tipo Equipo</th>
+                    <th class="action-column text-nowrap text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach( $equipos as $equipo)
+                <tr>
+                    <td>{{ $equipo->id }}</td>
+                    <td>{{ $equipo->marca }}</td>
+                    <td>{{ $equipo->modelo }}</td>
+                    <td>{{ $equipo->cod_interno }}</td>
+                    <td>{{ $equipo->cod_externo }}</td>
+                    <td>{{ $equipo->num_serie }}</td>
+                    <td>{{ $equipo->product_number }}</td>
+                    <td class="text-center">
+                        @if ($equipo->id_contratacion!=null)
+                        <a class="btn btn-sm btn-outline-secondary" href="#" data-toggle="tooltip" title="{{ $equipo->contratacion->empresa.': '.$equipo->contratacion->titulo . 
                         '   Fecha Inicio: '. date('d/m/Y',strtotime($equipo->contratacion->fecha_inicio)) . '   Fecha Fin: '. 
                         date('d/m/Y',strtotime($equipo->contratacion->fecha_fin))}}">ver</a>
-                    @endif
-                </td>
-                <td class="text-center">{{ $equipo->tipoEquipo->tipo }}</td>
-                <td class="action-column text-nowrap text-center">
-                    <a href="{{ url('/equipo/'.$equipo->id.'/edit')}}" class="btn btn-sm btn-warning">editar</a>
-                    |
-                    <form action="{{ url('/equipo/'.$equipo->id)}}" class="d-inline" method="post">
-                        @csrf
-                        {{ method_field('DELETE')}}
-                        <input type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Quieres eliminar el equipo?')" value="eliminar">
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    {!! $equipos->links() !!}
-    {{ 'Total registros: '. $equipos->total() }}
-
+                        @endif
+                    </td>
+                    <td class="text-center">{{ $equipo->tipoEquipo->tipo }}</td>
+                    <td class="action-column text-nowrap text-center">
+                        <a href="{{ url('/equipo/'.$equipo->id.'/edit')}}" class="btn btn-sm btn-warning">editar</a>
+                        |
+                        <form action="{{ url('/equipo/'.$equipo->id)}}" class="d-inline" method="post">
+                            @csrf
+                            {{ method_field('DELETE')}}
+                            <input type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Quieres eliminar el equipo?')" value="eliminar">
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        {!! $equipos->links() !!}
+        {{ 'Total registros: '. $equipos->total() }}
+    </div>
 </div>
 
 <script>

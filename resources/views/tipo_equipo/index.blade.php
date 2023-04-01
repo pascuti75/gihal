@@ -26,35 +26,37 @@
         </div>
     </form>
 
-    <table class="table table-light">
+    <div class="card card-body">
+        <table class="table table-light">
 
-        <thead class="thead-light">
-            <tr>
-                <th>Código</th>
-                <th>Tipo</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach( $tipos_equipo as $tipo_equipo)
-            <tr>
-                <td>{{ $tipo_equipo->cod_tipo_equipo }}</td>
-                <td>{{ $tipo_equipo->tipo }}</td>
-                <td>
-                    <a href="{{ url('/tipo_equipo/'.$tipo_equipo->id.'/edit')}}" class="btn btn-sm btn-warning">editar</a>
-                    |
-                    <form action="{{ url('/tipo_equipo/'.$tipo_equipo->id)}}" class="d-inline" method="post">
-                        @csrf
-                        {{ method_field('DELETE')}}
-                        <input type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Quieres eliminar el tipo de equipo?')" value="eliminar">
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    {!! $tipos_equipo->links() !!}
-    {{ 'Total registros: '. $tipos_equipo->total() }}
+            <thead class="thead-light">
+                <tr>
+                    <th class="ancho-50">Código</th>
+                    <th>Tipo</th>
+                    <th class="action-column text-nowrap text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach( $tipos_equipo as $tipo_equipo)
+                <tr>
+                    <td class="ancho-50">{{ $tipo_equipo->cod_tipo_equipo }}</td>
+                    <td>{{ $tipo_equipo->tipo }}</td>
+                    <td class="action-column text-nowrap text-center">
+                        <a href="{{ url('/tipo_equipo/'.$tipo_equipo->id.'/edit')}}" class="btn btn-sm btn-warning">editar</a>
+                        |
+                        <form action="{{ url('/tipo_equipo/'.$tipo_equipo->id)}}" class="d-inline" method="post">
+                            @csrf
+                            {{ method_field('DELETE')}}
+                            <input type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Quieres eliminar el tipo de equipo?')" value="eliminar">
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        {!! $tipos_equipo->links() !!}
+        {{ 'Total registros: '. $tipos_equipo->total() }}
+    </div>
 </div>
 
 <script>

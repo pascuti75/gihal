@@ -163,7 +163,7 @@
     <br>
 
     <div class="card card-body">
-        <table class="table table-light" style="font-size:13px;">
+        <table class="table table-light table-wide">
 
             <thead class="thead-light">
                 <tr>

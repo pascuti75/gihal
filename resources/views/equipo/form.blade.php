@@ -22,7 +22,7 @@
                     <select class="form-select" name="id_tipo_equipo" id="id_tipo_equipo">
                         <option value="option_select" disabled selected>Seleccionar</option>
                         @foreach ($tipos as $tipo)
-                        <option value="{{$tipo->id}}" {{old('id') == $tipo->id ? 'selected' : ''}}>{{$tipo->tipo}}</option>
+                        <option value="{{$tipo->id}}" {{old('id') == $tipo->id ? 'selected' : (isset($equipo)&&$equipo->id_tipo_equipo == $tipo->id ? 'selected' : '')}}>{{$tipo->tipo}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -33,13 +33,15 @@
                     <select class="form-select" name="id_contratacion" id="id_contratacion">
                         <option value="option_select" disabled selected>Seleccionar</option>
                         @foreach ($contrataciones as $contratacion)
-                        <option value="{{$contratacion->id}}" {{old('id') == $tipo->id ? 'selected' : ''}}>{{$contratacion->titulo}}</option>
+                        <option value="{{$contratacion->id}}" {{old('id_contratacion') == $contratacion->id ? 'selected' : (isset($equipo)&&$equipo->id_contratacion == $contratacion->id ? 'selected' : '')}}>{{$contratacion->titulo}}</option>
+
                         @endforeach
                     </select>
                 </div>
             </div>
         </div>
 
+        {{old('id_contratacion')}}
         <div class="row">
             <div class="col">
                 <div class="form-group">

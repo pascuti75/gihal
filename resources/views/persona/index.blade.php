@@ -28,39 +28,41 @@
         </div>
     </form>
 
-    <table class="table table-light">
+    <div class="card card-body">
+        <table class="table table-light">
 
-        <thead class="thead-light">
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Tipo</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach( $personas as $persona)
-            <tr>
-                <td>{{ $persona->id }}</td>
-                <td>{{ $persona->nombre }}</td>
-                <td>{{ $persona->apellidos }}</td>
-                <td>{{ $persona->tipo_personal }}</td>
-                <td>
-                    <a href="{{ url('/persona/'.$persona->id.'/edit')}}" class="btn btn-sm btn-warning">editar</a>
-                    |
-                    <form action="{{ url('/persona/'.$persona->id)}}" class="d-inline" method="post">
-                        @csrf
-                        {{ method_field('DELETE')}}
-                        <input type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Quieres eliminar la persona?')" value="eliminar">
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    {!! $personas->links() !!}
-    {{ 'Total registros: '. $personas->total() }}
+            <thead class="thead-light">
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th class="text-center">Tipo</th>
+                    <th class="action-column text-nowrap text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach( $personas as $persona)
+                <tr>
+                    <td>{{ $persona->id }}</td>
+                    <td>{{ $persona->nombre }}</td>
+                    <td>{{ $persona->apellidos }}</td>
+                    <td class="text-center">{{ $persona->tipo_personal }}</td>
+                    <td class="action-column text-nowrap text-center">
+                        <a href="{{ url('/persona/'.$persona->id.'/edit')}}" class="btn btn-sm btn-warning">editar</a>
+                        |
+                        <form action="{{ url('/persona/'.$persona->id)}}" class="d-inline" method="post">
+                            @csrf
+                            {{ method_field('DELETE')}}
+                            <input type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Quieres eliminar la persona?')" value="eliminar">
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        {!! $personas->links() !!}
+        {{ 'Total registros: '. $personas->total() }}
+    </div>
 </div>
 
 <script>

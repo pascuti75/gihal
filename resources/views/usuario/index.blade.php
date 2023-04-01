@@ -16,7 +16,7 @@
     </div>
     @endif
 
-    <a href="{{ url('/usuario/create') }}" class="btn btn-success">nuevo usuario</a>
+    <a href="{{ url('/usuario/create') }}" class="btn btn-success">Crear usuario</a>
     <br><br>
     <form method="GET">
         <div class="input-group mb-3">
@@ -27,45 +27,46 @@
     </form>
 
 
+    <div class="card card-body">
+        <table class="table table-light">
 
-    <table class="table table-light">
+            <thead class="thead-light">
+                <tr>
+                    <th>#</th>
+                    <th>Usuario</th>
+                    <th class="text-center">Administrador</th>
+                    <th class="text-center">Gestor</th>
+                    <th class="text-center">Técnico</th>
+                    <th class="text-center">Consultor</th>
+                    <th class="action-column text-nowrap text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach( $users as $user)
+                <tr>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->username }}</td>
+                    <td class="text-center">@if($user->es_administrador==1) SI @else - @endif</td>
+                    <td class="text-center">@if($user->es_gestor==1) SI @else - @endif</td>
+                    <td class="text-center">@if($user->es_tecnico==1) SI @else - @endif</td>
+                    <td class="text-center">@if($user->es_consultor==1) SI @else - @endif</td>
+                    <td class="action-column text-nowrap text-center">
+                        <a href="{{ url('/usuario/'.$user->id.'/edit')}}" class="btn btn-sm btn-warning">editar</a>
+                        |
+                        <form action="{{ url('/usuario/'.$user->id)}}" class="d-inline" method="post">
+                            @csrf
+                            {{ method_field('DELETE')}}
+                            <input type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Quieres eliminar el usuario?')" value="eliminar">
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        {!! $users->links() !!}
 
-        <thead class="thead-light">
-            <tr>
-                <th>#</th>
-                <th>Usuario</th>
-                <th class="text-center">Administrador</th>
-                <th class="text-center">Gestor</th>
-                <th class="text-center">Técnico</th>
-                <th class="text-center">Consultor</th>
-                <th class="text-center">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach( $users as $user)
-            <tr>
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->username }}</td>
-                <td class="text-center">@if($user->es_administrador==1) SI @else - @endif</td>
-                <td class="text-center">@if($user->es_gestor==1) SI @else - @endif</td>
-                <td class="text-center">@if($user->es_tecnico==1) SI @else - @endif</td>
-                <td class="text-center">@if($user->es_consultor==1) SI @else - @endif</td>
-                <td class="text-center">
-                    <a href="{{ url('/usuario/'.$user->id.'/edit')}}" class="btn btn-sm btn-warning">editar</a>
-                    |
-                    <form action="{{ url('/usuario/'.$user->id)}}" class="d-inline" method="post">
-                        @csrf
-                        {{ method_field('DELETE')}}
-                        <input type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Quieres dar de baja el usuario?')" value="baja">
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    {!! $users->links() !!}
-
-    {{ 'Total registros: '. $users->total() }}
+        {{ 'Total registros: '. $users->total() }}
+    </div>
 </div>
 
 <script>

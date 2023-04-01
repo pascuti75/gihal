@@ -136,7 +136,7 @@
 </body>
 <footer class="text-center text-lg-start fixed-bottom">
 
-    <div class="text-center p-2">
+    <div class="text-center">
         © 2023 GIHAL. Gestión de Inventario Hardware para Admininistraciones Locales.
     </div>
 </footer>

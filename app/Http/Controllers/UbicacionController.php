@@ -114,6 +114,7 @@ class UbicacionController extends Controller
         //mensajes de validación
         $mensaje = [
             'required' => 'La :attribute es obligatoria',
+            'direccion.required' => 'La dirección es obligatoria',
             'servicio.required' => 'El :attribute es obligatorio'
         ];
 

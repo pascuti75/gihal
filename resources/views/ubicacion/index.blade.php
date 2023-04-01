@@ -29,43 +29,44 @@
         </div>
     </form>
 
-    <table class="table table-light">
+    <div class="card card-body">
+        <table class="table table-light">
 
-        <thead class="thead-light">
-            <tr>
-                <th>#</th>
-                <th>Servicio</th>
-                <th>Dependencia</th>
-                <th>Dirección</th>
-                <th>Planta</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach( $ubicaciones as $ubicacion)
-            <tr>
-                <td>{{ $ubicacion->id }}</td>
-                <td>{{ $ubicacion->servicio }}</td>
-                <td>{{ $ubicacion->dependencia }}</td>
-                <td>{{ $ubicacion->direccion }}</td>
-                <td>{{ $ubicacion->planta }}</td>
-                <td>
-                    <a href="{{ url('/ubicacion/'.$ubicacion->id.'/edit')}}" class="btn btn-sm btn-warning">editar</a>
-                    |
-                    <form action="{{ url('/ubicacion/'.$ubicacion->id)}}" class="d-inline" method="post">
-                        @csrf
-                        {{ method_field('DELETE')}}
-                        <input type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Quieres eliminar la ubicación?')" value="eliminar">
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    {!! $ubicaciones->links() !!}
-    {{ 'Total registros: '. $ubicaciones->total() }}
+            <thead class="thead-light">
+                <tr>
+                    <th>#</th>
+                    <th>Servicio</th>
+                    <th>Dependencia</th>
+                    <th>Dirección</th>
+                    <th class="text-center">Planta</th>
+                    <th class="action-column text-nowrap text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach( $ubicaciones as $ubicacion)
+                <tr>
+                    <td>{{ $ubicacion->id }}</td>
+                    <td>{{ $ubicacion->servicio }}</td>
+                    <td>{{ $ubicacion->dependencia }}</td>
+                    <td>{{ $ubicacion->direccion }}</td>
+                    <td class="text-center">{{ $ubicacion->planta }}</td>
+                    <td class="action-column text-nowrap text-center">
+                        <a href="{{ url('/ubicacion/'.$ubicacion->id.'/edit')}}" class="btn btn-sm btn-warning">editar</a>
+                        |
+                        <form action="{{ url('/ubicacion/'.$ubicacion->id)}}" class="d-inline" method="post">
+                            @csrf
+                            {{ method_field('DELETE')}}
+                            <input type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Quieres eliminar la ubicación?')" value="eliminar">
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        {!! $ubicaciones->links() !!}
+        {{ 'Total registros: '. $ubicaciones->total() }}
+    </div>
 </div>
-
 <script>
     $(document).ready(function() {
         initUbicacionIndex();

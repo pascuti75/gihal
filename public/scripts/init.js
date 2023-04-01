@@ -42,6 +42,21 @@ function initContratacionIndex() {
     });
 }
 
+
+function initContratacionForm() {
+    $(".campo_fecha").flatpickr({
+        locale: "es"
+    });
+
+    $('#reset_fecha_inicio').click(function () {
+        $('#fecha_inicio').val('');
+    });
+
+    $('#reset_fecha_fin').click(function () {
+        $('#fecha_fin').val('');
+    });
+}
+
 function initEquipoIndex() {
     $("#boton-reset").on('click', function (event) {
         $('#query').val('');
@@ -64,6 +79,7 @@ function initOperacionIndex() {
         $('#query').val('');
         $("#boton-buscar").click();
     });
+
 }
 
 function initPersonaIndex() {
