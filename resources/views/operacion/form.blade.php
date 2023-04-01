@@ -93,10 +93,6 @@
 
 <script>
     $(document).ready(function() {
-
-        $("form").submit(function() {
-            $("#id_equipo").prop("disabled", false);
-            $("#id_user").prop("disabled", false);
-        });
+        initOperacionForm();
     });
 </script>

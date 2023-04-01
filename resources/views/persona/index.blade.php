@@ -65,12 +65,7 @@
 
 <script>
     $(document).ready(function() {
-
-        $("#boton-reset").on('click', function(event) {
-            $('#query').val('');
-            $("#boton-buscar").click();
-        });
-
+        initPersonaIndex();
     });
 </script>
 

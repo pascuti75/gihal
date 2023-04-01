@@ -48,13 +48,7 @@
 
 <script>
     $(document).ready(function() {
-
-
-        $("#btn_volver").click(function() {
-            event.preventDefault();
-            history.back();
-        });
-
+        initConsultaShow();
     });
 </script>
 

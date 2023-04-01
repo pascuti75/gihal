@@ -190,7 +190,7 @@
                     <td>{{ isset($operacion->equipo->contratacion) ? $operacion->equipo->contratacion->empresa : '' }}</td>
                     <td>{{ isset($operacion->id_user) ? $operacion->user->username : '' }}</td>
                     <td class="action-column text-nowrap text-center">
-                        <a href="{{url('/consulta/'.$operacion->id) }}" class="btn btn-sm btn-warning">ver</a>
+                        <a href="{{url('/consulta/'.$operacion->id) }}" class="btn btn-sm btn-outline-secondary">ver</a>
                     </td>
                 </tr>
                 @endforeach
@@ -204,31 +204,7 @@
 
 <script>
     $(document).ready(function() {
-
-        $(".campo_fecha").flatpickr({
-            locale: "es"
-        });
-
-        $('#reset_f_oper_ini').click(function() {
-            $('#f_oper_ini').val('');
-        });
-
-        $('#reset_f_oper_fin').click(function() {
-            $('#f_oper_fin').val('');
-        });
-
-        $('#reset_cod_interno').click(function() {
-            $('#cod_interno').val('');
-        });
-
-        $('#reset_num_serie').click(function() {
-            $('#num_serie').val('');
-        });
-
-        $('#reset_product_number').click(function() {
-            $('#product_number').val('');
-        });
-
+        initConsultaIndex();
     });
 </script>
 

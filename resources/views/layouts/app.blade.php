@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <!-- Scripts -->
     <script src="{{ url('/scripts/jquery-3.6.3/jquery-3.6.3.min.js')}}"></script>
+    <script src="{{ url('/scripts/init.js')}}"></script>
     <!-- campos de tipo calendario-->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
