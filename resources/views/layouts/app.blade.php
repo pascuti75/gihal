@@ -32,7 +32,7 @@
 
 </head>
 
-<body>
+<body class="mb-4">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container-fluid">
@@ -133,7 +133,7 @@
 </body>
 <footer class="text-center text-lg-start fixed-bottom">
 
-    <div class="text-center p-3">
+    <div class="text-center p-2">
         © 2023 GIHAL. Gestión de Inventario Hardware para Admininistraciones Locales.
     </div>
 </footer>

@@ -146,7 +146,7 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="activa" id="activa" {{old('activa') == 'on' ? 'checked' : (Request::capture()->get('activa') == 'on' ? 'checked' : '')}}>
                             <label class="form-check-label" for="activa">
-                                Mostrar sólo operación activa
+                                Mostrar sólo operaciones activas
                             </label>
                         </div>
                     </div>
