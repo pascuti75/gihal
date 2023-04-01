@@ -122,7 +122,12 @@ class PersonaController extends Controller
      */
     public function destroy($id)
     {
-        Persona::destroy($id);
-        return redirect()->action([PersonaController::class, 'index'])->with('mensaje', 'La persona se ha eliminado correctamente');
+
+        try {
+            Persona::destroy($id);
+            return redirect()->action([PersonaController::class, 'index'])->with('mensaje', 'La persona se ha eliminado correctamente');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->action([PersonaController::class, 'index'])->with('error', 'No es posible eliminar la persona');
+        }
     }
 }

@@ -126,7 +126,11 @@ class ContratacionController extends Controller
      */
     public function destroy($id)
     {
-        Contratacion::destroy($id);
-        return redirect()->action([ContratacionController::class, 'index'])->with('mensaje', 'La contratación se ha eliminado correctamente');
+        try {
+            Contratacion::destroy($id);
+            return redirect()->action([ContratacionController::class, 'index'])->with('mensaje', 'La contratación se ha eliminado correctamente');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->action([ContratacionController::class, 'index'])->with('error', 'No es posible eliminar la contratación');
+        }
     }
 }

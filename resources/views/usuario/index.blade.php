@@ -10,6 +10,11 @@
         {{ Session::get('mensaje') }}
     </div>
     @endif
+    @if(Session::has('error') && Session::get('error')!=="")
+    <div class="alert alert-danger" role="alert">
+        {{ Session::get('error') }}
+    </div>
+    @endif
 
     <a href="{{ url('/usuario/create') }}" class="btn btn-success">nuevo usuario</a>
     <br><br>

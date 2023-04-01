@@ -153,7 +153,11 @@ class EquipoController extends Controller
      */
     public function destroy($id)
     {
-        Equipo::destroy($id);
-        return redirect()->action([EquipoController::class, 'index'])->with('mensaje', 'El equipo se ha eliminado correctamente');
+        try {
+            Equipo::destroy($id);
+            return redirect()->action([EquipoController::class, 'index'])->with('mensaje', 'El equipo se ha eliminado correctamente');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->action([EquipoController::class, 'index'])->with('error', 'No es posible eliminar el equipo');
+        }
     }
 }

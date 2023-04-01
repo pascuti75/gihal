@@ -169,7 +169,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return redirect()->action([UserController::class, 'index'])->with('mensaje', 'El usuario se ha eliminado correctamente');
+        try {
+            User::destroy($id);
+            return redirect()->action([UserController::class, 'index'])->with('mensaje', 'El usuario se ha eliminado correctamente');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->action([UserController::class, 'index'])->with('error', 'No es posible eliminar el usuario');
+        }
     }
 }
