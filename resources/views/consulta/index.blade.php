@@ -5,10 +5,21 @@
 
     <h1 class="text-center">CONSULTAS</h1>
 
-    <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
-        <i class="fa fa-chevron-down"></i> Mostrar/Ocultar Filtros
+    @if(count($errors)>0)
+    <div class="alert alert-danger" role="alert">
+        <ul>
+            @foreach( $errors->all() as $error)
+
+            <li> {{ $error }} </li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <button class="btn btn-outline-danger mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
+        Mostrar/Ocultar Filtros
     </button>
-    <div class="collapse" id="collapseFilters">
+    <div class="collapse show" id="collapseFilters">
         <div class="card card-body">
             <form method="GET">
                 <div class="form-group row mb-2">
@@ -179,7 +190,7 @@
                     <td>{{ isset($operacion->equipo->contratacion) ? $operacion->equipo->contratacion->empresa : '' }}</td>
                     <td>{{ isset($operacion->id_user) ? $operacion->user->username : '' }}</td>
                     <td class="action-column text-nowrap text-center">
-
+                        <a href="{{url('/consulta/'.$operacion->id) }}" class="btn btn-sm btn-warning">ver</a>
                     </td>
                 </tr>
                 @endforeach

@@ -88,6 +88,6 @@ class OperacionController extends Controller
             $mensaje = "Operación realizada correctamente";
         }
 
-        return redirect()->action([OperacionController::class, 'index'])->with('mensaje', $mensaje)->with('error', $error);;
+        return redirect()->action([OperacionController::class, 'index'])->with('mensaje', $mensaje)->with('error', $error);
     }
 }

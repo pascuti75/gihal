@@ -88,6 +88,7 @@ Route::group(['middleware' => ['auth', 'es-tecnico']], function () {
 //restriccion de acceso a routes por usuario autententicado y permiso esConsultor
 Route::group(['middleware' => ['auth', 'es-consultor']], function () {
     Route::get('/consulta', [ConsultaController::class, 'index'])->name('consulta.index');
+    Route::get('/consulta/{operacion}', [ConsultaController::class, 'show'])->name('consulta.show');
 });
 
 

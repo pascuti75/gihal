@@ -38,7 +38,7 @@
             <div class="container-fluid">
 
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                    <img class="me-2" src="./images/logo.png" width="50" height="50" alt="">
+                    <img class="me-2" src="{{ asset('images/logo.png')}}" width="50" height="50" alt="">
                     <span class="h2 m-0">
                         GIHAL
                     </span>
