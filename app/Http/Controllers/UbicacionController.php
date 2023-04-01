@@ -15,7 +15,7 @@ class UbicacionController extends Controller
      * Display a listing of the resource.
      */
 
-     /*
+    /*
     public function index()
     {
         $datos['ubicaciones'] = Ubicacion::paginate(5);
@@ -136,7 +136,11 @@ class UbicacionController extends Controller
      */
     public function destroy($id)
     {
-        Ubicacion::destroy($id);
-        return redirect()->action([UbicacionController::class, 'index'])->with('mensaje', 'La ubicación se ha eliminado correctamente');
+        try {
+            Ubicacion::destroy($id);
+            return redirect()->action([UbicacionController::class, 'index'])->with('mensaje', 'La ubicación se ha eliminado correctamente');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->action([UbicacionController::class, 'index'])->with('error', 'No es posible eliminar la ubicación');
+        }
     }
 }

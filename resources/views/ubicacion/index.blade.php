@@ -11,6 +11,12 @@
     </div>
     @endif
 
+    @if(Session::has('error'))
+    <div class="alert alert-danger" role="alert">
+        {{ Session::get('error') }}
+    </div>
+    @endif
+
 
 
     <a href="{{ url('/ubicacion/create') }}" class="btn btn-success">Crear ubicación</a>
