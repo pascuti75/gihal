@@ -12,6 +12,9 @@ use App\Models\Contratacion;
 use App\Models\Equipo;
 
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
+
 
 
 class ConsultaController extends Controller
@@ -79,6 +82,49 @@ class ConsultaController extends Controller
 
         return view('consulta.index', compact(['operaciones', 'tipos', 'tecnicos', 'personas', 'ubicaciones', 'contrataciones', 'marcas', 'modelos']))->with('error', $mensaje);
     }
+
+
+    public function pdf(Request $request)
+    {
+
+        $tipo_operacion = $request->get('tipo_operacion');
+        $activa = $request->get('activa');
+        $tecnico = $request->get('tecnico');
+        $persona = $request->get('persona');
+        $cod_interno = $request->get('cod_interno');
+        $tipo_equipo = $request->get('tipo_equipo');
+        $ubicacion = $request->get('ubicacion');
+        $contratacion = $request->get('contratacion');
+        $f_oper_ini = $request->get('f_oper_ini');
+        $f_oper_fin = $request->get('f_oper_fin');
+        $marca = $request->get('marca');
+        $modelo = $request->get('modelo');
+        $num_serie = $request->get('num_serie');
+        $product_number = $request->get('product_number');
+
+
+        $operaciones = Operacion::orderBy('id', 'desc')
+            ->codInterno($cod_interno)
+            ->tipoOperacion($tipo_operacion)
+            ->tecnico($tecnico)
+            ->persona($persona)
+            ->tipoEquipo($tipo_equipo)
+            ->ubicacion($ubicacion)
+            ->contratacion($contratacion)
+            ->fOperIni($f_oper_ini)
+            ->fOperFin($f_oper_fin)
+            ->marca($marca)
+            ->modelo($modelo)
+            ->numSerie($num_serie)
+            ->productNumber($product_number)
+            ->activa($activa)
+            ->get();
+
+        $pdf = Pdf::loadView('consulta.pdf', compact(['operaciones']));
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->download('informe_' . Carbon::now()->format('YmdHis') . '.pdf');
+    }
+
 
 
     /**

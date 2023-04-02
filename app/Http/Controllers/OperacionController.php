@@ -14,16 +14,11 @@ class OperacionController extends Controller
 {
     public function index(Request $request)
     {
-        //$operaciones_query = Operacion::query();
-
-        // $search_param = $request->query('query');
-
         $search_param = $request->get('query');
-
 
         if ($search_param) {
 
-            $operaciones_query = Operacion::orderBy('id', 'desc')
+            $operaciones = Operacion::orderBy('id', 'desc')
                 ->orCodInternoActiva($search_param)
                 ->orTipoOperacionActiva($search_param)
                 ->orTecnicoActiva($search_param)
@@ -31,14 +26,9 @@ class OperacionController extends Controller
                 ->orTipoEquipoActiva($search_param)
                 ->orUbicacionActiva($search_param)
                 ->paginate(5);
-
-
-            //  $operaciones_query = Operacion::search($search_param)->where('activa', 'si')->orderBy('id', 'desc')->paginate(5);
         } else {
-            $operaciones_query = Operacion::where('activa', 'si')->orderBy('id', 'desc')->paginate(5);
+            $operaciones = Operacion::where('activa', 'si')->orderBy('id', 'desc')->paginate(5);
         }
-
-        $operaciones = $operaciones_query;
 
         return view('operacion.index', compact('operaciones', 'search_param'));
     }

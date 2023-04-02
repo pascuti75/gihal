@@ -196,10 +196,19 @@
                 @endforeach
             </tbody>
         </table>
-        {!! $operaciones->links() !!}
-        {{ 'Total registros: '. $operaciones->total() }}
-    </div>
+        <div class="form-group row mb-2">
 
+
+            <div class="col-md-11">
+                {!! $operaciones->links() !!}
+                {{ 'Total registros: '. $operaciones->total() }}
+            </div>
+            <div class="col-md-1 text-right">
+                <a href="{{ route('consulta.pdf').'?'.$_SERVER['QUERY_STRING'] }}" class="btn btn-warning">Exportar a PDF</a>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <script>

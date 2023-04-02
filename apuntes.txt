@@ -103,3 +103,7 @@ composer require twbs/bootstrap-icons
 
 
 -- Resolver problema con el formato de las fechas en las busquedas
+
+*** liberia para pdf: DomPDF
+
+composer require barryvdh/laravel-dompdf
