@@ -65,10 +65,27 @@ class Operacion extends Model
     }
 
 
+    public function scopeOrCodInternoActiva($query, $cod_interno)
+    {
+        if ($cod_interno) {
+            return $query->orwherehas('equipo', function ($query) use ($cod_interno) {
+                $query->where('cod_interno', 'LIKE', "%$cod_interno%");
+            })->where('activa', 'LIKE', "si");
+        }
+    }
+
+
     public function scopeTipoOperacion($query, $tipo_operacion)
     {
         if ($tipo_operacion) {
             return $query->where('tipo_operacion', 'LIKE', "$tipo_operacion");
+        }
+    }
+
+    public function scopeOrTipoOperacionActiva($query, $tipo_operacion)
+    {
+        if ($tipo_operacion) {
+            return $query->orwhere('tipo_operacion', 'LIKE', "%$tipo_operacion%")->where('activa', 'LIKE', "si");
         }
     }
 
@@ -90,6 +107,15 @@ class Operacion extends Model
         }
     }
 
+    public function scopeOrTecnicoActiva($query, $tecnico)
+    {
+        if ($tecnico) {
+            return $query->orwhereHas('user', function ($query) use ($tecnico) {
+                $query->where('username', 'LIKE', "%$tecnico%");
+            })->where('activa', 'LIKE', "si");
+        }
+    }
+
 
     public function scopePersona($query, $persona)
     {
@@ -97,6 +123,15 @@ class Operacion extends Model
             return $query->whereHas('persona', function ($query) use ($persona) {
                 $query->where('id', 'LIKE', "$persona");
             });
+        }
+    }
+
+    public function scopeOrPersonaActiva($query, $persona)
+    {
+        if ($persona) {
+            return $query->orwhereHas('persona', function ($query) use ($persona) {
+                $query->whereraw("UPPER(CONCAT(nombre, ' ', apellidos)) LIKE UPPER(CONCAT( '%',?,'%'))", [$persona]);
+            })->where('activa', 'LIKE', "si");
         }
     }
 
@@ -110,6 +145,17 @@ class Operacion extends Model
         }
     }
 
+    public function scopeOrTipoEquipoActiva($query, $tipo_equipo)
+    {
+        if ($tipo_equipo) {
+            return $query->orwhereHas('equipo', function ($query) use ($tipo_equipo) {
+                $query->whereHas('tipoEquipo', function ($query) use ($tipo_equipo) {
+                    $query->where('tipo', 'LIKE', "%$tipo_equipo%");
+                });
+            })->where('activa', 'LIKE', "si");
+        }
+    }
+
 
     public function scopeUbicacion($query, $ubicacion)
     {
@@ -117,6 +163,15 @@ class Operacion extends Model
             return $query->whereHas('ubicacion', function ($query) use ($ubicacion) {
                 $query->where('id', 'LIKE', "$ubicacion");
             });
+        }
+    }
+
+    public function scopeOrUbicacionActiva($query, $ubicacion)
+    {
+        if ($ubicacion) {
+            return $query->orwhereHas('ubicacion', function ($query) use ($ubicacion) {
+                $query->whereraw("UPPER(CONCAT(servicio, ' - ', dependencia)) LIKE UPPER(CONCAT( '%',?,'%'))", [$ubicacion]);
+            })->where('activa', 'LIKE', "si");
         }
     }
 
