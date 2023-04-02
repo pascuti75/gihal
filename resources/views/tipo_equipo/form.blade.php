@@ -17,12 +17,12 @@
 
     <div class="form-group">
         <label for="cod_tipo_equipo">Código:</label>
-        <input type="text" class="form-control" name="cod_tipo_equipo" id="cod_tipo_equipo" value="{{ isset($tipo_equipo->cod_tipo_equipo)?$tipo_equipo->cod_tipo_equipo:old('cod_tipo_equipo') }}">
+        <input type="text" class="form-control" name="cod_tipo_equipo" id="cod_tipo_equipo" value="{{ old('cod_tipo_equipo', isset($tipo_equipo->cod_tipo_equipo)?$tipo_equipo->cod_tipo_equipo:old('cod_tipo_equipo')) }} " @if($modo=="editar" ) readonly @endif>    
     </div>
 
     <div class="form-group">
         <label for="tipo">Tipo:</label>
-        <input type="text" class="form-control" name="tipo" id="tipo" value="{{ isset($tipo_equipo->tipo)?$tipo_equipo->tipo:old('tipo') }}">
+        <input type="text" class="form-control" name="tipo" id="tipo" value="{{ old('tipo', isset($tipo_equipo->tipo)?$tipo_equipo->tipo:old('tipo')) }}"> 
     </div>
 
 

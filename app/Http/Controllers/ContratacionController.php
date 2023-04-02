@@ -49,7 +49,7 @@ class ContratacionController extends Controller
             'titulo' => 'required|string|max:500',
             'empresa' => 'required|string|max:250',
             'fecha_inicio' => 'nullable|date',
-            'fecha_fin' => 'nullable|date',
+            'fecha_fin' => 'nullable|date|after:fecha_inicio',
         ];
 
         //mensajes de validación
@@ -58,6 +58,9 @@ class ContratacionController extends Controller
             'empresa.required' => 'La :attribute es obligatoria',
             'fecha_inicio.date' => 'La fecha de inicio no es una fecha válida',
             'fecha_fin.date' => 'La fecha de fin no es una fecha válida',
+            'fecha_fin.after' => 'La fecha de fin debe de ser posterior a la fecha de inicio',
+            'titulo.max' => 'El título debe de tener una longitud menor o igual a 500 caracteres',
+            'empresa.max' => 'La empresa debe de tener una longitud menor o igual a 250 caracteres',
         ];
 
 
@@ -107,6 +110,8 @@ class ContratacionController extends Controller
             'fecha_inicio.date' => 'La fecha de inicio no es una fecha válida',
             'fecha_fin.date' => 'La fecha de fin no es una fecha válida',
             'fecha_fin.after' => 'La fecha de fin debe de ser posterior a la fecha de inicio',
+            'titulo.max' => 'El título debe de tener una longitud menor o igual a 500 caracteres',
+            'empresa.max' => 'La empresa debe de tener una longitud menor o igual a 250 caracteres',
         ];
 
 

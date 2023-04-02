@@ -68,7 +68,11 @@ class UbicacionController extends Controller
         //mensajes de validación
         $mensaje = [
             'required' => 'La :attribute es obligatoria',
-            'servicio.required' => 'El :attribute es obligatorio'
+            'servicio.required' => 'El :attribute es obligatorio',
+            'servicio.max' => 'El servicio debe de tener una longitud menor o igual a 250 caracteres',
+            'dependencia.max' => 'La dependencia debe de tener una longitud menor o igual a 250 caracteres',
+            'direccion.max' => 'La dirección debe de tener una longitud menor o igual a 500 caracteres',
+            'planta.max' => 'La planta debe de tener una longitud menor o igual a 30 caracteres',
         ];
 
 
@@ -115,7 +119,11 @@ class UbicacionController extends Controller
         $mensaje = [
             'required' => 'La :attribute es obligatoria',
             'direccion.required' => 'La dirección es obligatoria',
-            'servicio.required' => 'El :attribute es obligatorio'
+            'servicio.required' => 'El :attribute es obligatorio',
+            'servicio.max' => 'El servicio debe de tener una longitud menor o igual a 250 caracteres',
+            'dependencia.max' => 'La dependencia debe de tener una longitud menor o igual a 250 caracteres',
+            'direccion.max' => 'La dirección debe de tener una longitud menor o igual a 500 caracteres',
+            'planta.max' => 'La planta debe de tener una longitud menor o igual a 30 caracteres',
         ];
 
 

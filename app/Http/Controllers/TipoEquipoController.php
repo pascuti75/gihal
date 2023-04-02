@@ -46,14 +46,17 @@ class TipoEquipoController extends Controller
     {
         //campos para validar
         $campos = [
-            'cod_tipo_equipo' => 'required|string|max:3',
+            'cod_tipo_equipo' => 'required|string|max:3|unique:tipos_equipo',
             'tipo' => 'required|string|max:100',
         ];
 
         //mensajes de validación
         $mensaje = [
             'cod_tipo_equipo.required' => 'El código es obligatorio',
-            'tipo.required' => 'El tipo es obligatorio'
+            'cod_tipo_equipo.max' => 'El código debe de tener una longitud menor o igual a 3 caracteres',
+            'tipo.required' => 'El tipo es obligatorio',
+            'tipo.max' => 'El tipo debe de tener una longitud menor o igual a 100 caracteres',
+            'cod_tipo_equipo.unique' => 'El código de tipo de equipo ya está en uso',
         ];
 
 
@@ -97,8 +100,10 @@ class TipoEquipoController extends Controller
         //mensajes de validación
         $mensaje = [
             'cod_tipo_equipo.required' => 'El código es obligatorio',
-            'tipo.required' => 'El tipo es obligatorio'
-        ];
+            'cod_tipo_equipo.max' => 'El código debe de tener una longitud menor o igual a 3 caracteres',
+            'tipo.required' => 'El tipo es obligatorio',
+            'tipo.max' => 'El tipo debe de tener una longitud menor o igual a 100 caracteres',
+            ];
 
 
 

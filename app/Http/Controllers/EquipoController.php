@@ -70,6 +70,12 @@ class EquipoController extends Controller
             'modelo.required' => 'El modelo es obligatorio',
             'num_serie.required' => 'El número de serie es obligatorio',
             'id_tipo_equipo.required' => 'El tipo es obligatorio',
+            'cod_interno.max' => 'El código interno debe de tener una longitud menor o igual a 100 caracteres',
+            'cod_externo.max' => 'El código externo debe de tener una longitud menor o igual a 100 caracteres',
+            'marca.max' => 'La marca debe de tener una longitud menor o igual a 100 caracteres',
+            'modelo.max' => 'El modelo debe de tener una longitud menor o igual a 250 caracteres',
+            'product_number.max' => 'El product number debe de tener una longitud menor o igual a 250 caracteres',
+            'num_serie.max' => 'El número de serie debe de tener una longitud menor o igual a 100 caracteres',
         ];
 
 
@@ -134,6 +140,12 @@ class EquipoController extends Controller
             'modelo.required' => 'El modelo es obligatorio',
             'num_serie.required' => 'El número de serie es obligatorio',
             'id_tipo_equipo.required' => 'El tipo es obligatorio',
+            'cod_interno.max' => 'El código interno debe de tener una longitud menor o igual a 100 caracteres',
+            'cod_externo.max' => 'El código externo debe de tener una longitud menor o igual a 100 caracteres',
+            'marca.max' => 'La marca debe de tener una longitud menor o igual a 100 caracteres',
+            'modelo.max' => 'El modelo debe de tener una longitud menor o igual a 250 caracteres',
+            'product_number.max' => 'El product number debe de tener una longitud menor o igual a 250 caracteres',
+            'num_serie.max' => 'El número de serie debe de tener una longitud menor o igual a 100 caracteres',
         ];
 
 

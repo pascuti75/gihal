@@ -56,6 +56,8 @@ class PersonaController extends Controller
             'nombre.required' => 'El :attribute es obligatorio',
             'apellidos.required' => 'Los :attribute son obligatorios',
             'tipo_personal.required' => 'El :attribute es obligatorio',
+            'nombre.max' => 'El nombre debe de tener una longitud menor o igual a 250 caracteres',
+            'apellidos.max' => 'Los apellidos deben de tener una longitud menor o igual a 250 caracteres',
         ];
 
 
@@ -102,6 +104,8 @@ class PersonaController extends Controller
             'nombre.required' => 'El :attribute es obligatorio',
             'apellidos.required' => 'Los :attribute son obligatorios',
             'tipo_personal.required' => 'El :attribute es obligatorio',
+            'nombre.max' => 'El nombre debe de tener una longitud menor o igual a 250 caracteres',
+            'apellidos.max' => 'Los apellidos deben de tener una longitud menor o igual a 250 caracteres',
         ];
 
 

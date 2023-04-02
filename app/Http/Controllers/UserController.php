@@ -90,7 +90,10 @@ class UserController extends Controller
         //mensajes de validación
         $mensaje = [
             'username.required' => 'El nombre de usuario es obligatorio',
-            'password.required' => 'La contraseña es obligatoria'
+            'password.required' => 'La contraseña es obligatoria',
+            'username.max' => 'El usuario debe de tener una longitud menor o igual a 255 caracteres',
+            'password.min' => 'La contraseña debe de tener una longitud mínima de 8 caracteres',
+            'username.unique' => 'El nombre de usuario ya está en uso',
         ];
 
 
@@ -142,7 +145,9 @@ class UserController extends Controller
         //mensajes de validación
         $mensaje = [
             'username.required' => 'El nombre de usuario es obligatorio',
-            'password.required' => 'La contraseña es obligatoria'
+            'password.required' => 'La contraseña es obligatoria',
+            'username.max' => 'El usuario debe de tener una longitud menor o igual a 255 caracteres',
+            'password.min' => 'La contraseña debe de tener una longitud mínima de 8 caracteres'
         ];
 
 

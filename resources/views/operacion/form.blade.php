@@ -48,9 +48,9 @@
         <div class="form-group">
             <label for="id_persona">Persona:</label>
             <select class="form-select" name="id_persona" id="id_persona">
-                <option value="option_select" disabled selected>Seleccionar</option>
+                <option value="">Seleccionar</option>
                 @foreach ($personas as $persona)
-                <option value="{{$persona->id}}" {{old('id') == $persona->id ? 'selected' : ($operacion->id_persona == $persona->id ? 'selected' : '')}}>
+                <option value="{{$persona->id}}" {{isset($operacion->id_persona ) ? (old('id_persona',$operacion->id_persona) == $persona->id ? 'selected' : '') : (old('id_persona') == $persona->id ? 'selected' : '')}}>
                     {{$persona->apellidos .', '. $persona->nombre}}
                 </option>
                 @endforeach
@@ -64,7 +64,7 @@
             <select class="form-select" name="id_ubicacion" id="id_ubicacion">
                 <option value="option_select" disabled selected>Seleccionar</option>
                 @foreach ($ubicaciones as $ubicacion)
-                <option value="{{$ubicacion->id}}" {{old('id') == $ubicacion->id ? 'selected' : ($operacion->id_ubicacion == $ubicacion->id ? 'selected' : '')}}>{{$ubicacion->servicio .' - '. 
+                <option value="{{$ubicacion->id}}"  {{isset($operacion->id_ubicacion ) ? (old('id_ubicacion',$operacion->id_ubicacion) == $ubicacion->id ? 'selected' : '') : (old('id_ubicacion') == $ubicacion->id ? 'selected' : '')}}>{{$ubicacion->servicio .' - '. 
                     $ubicacion->dependencia .' - '. $ubicacion->direccion .' - ' . ' Planta ' . $ubicacion->planta }}</option>
                 @endforeach
             </select>
