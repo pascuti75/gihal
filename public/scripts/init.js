@@ -24,6 +24,37 @@ function initConsultaIndex() {
         $('#product_number').val('');
     });
 
+
+    autocompletar('cod_interno', 'cod_interno_list');
+    autocompletar('product_number', 'product_number_list');
+    autocompletar('num_serie', 'num_serie_list');
+
+    function autocompletar(campo, campo_list) {
+        $('#' + campo).keyup(function () {
+            var query = $(this).val();
+            if (query != '') {
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "./autocompletar/" + campo,
+                    method: "POST",
+                    data: {
+                        query: query,
+                        _token: _token
+                    },
+                    success: function (data) {
+                        $('#' + campo_list).fadeIn();
+                        $('#' + campo_list).html(data);
+                    }
+                });
+            }
+        });
+
+        $(document).on('click', '#' + campo_list + ' li', function () {
+            $('#' + campo).val($(this).text());
+            $('#' + campo_list).fadeOut();
+        });
+    }
+
 }
 
 
@@ -32,6 +63,8 @@ function initConsultaShow() {
         event.preventDefault();
         history.back();
     });
+
+
 }
 
 

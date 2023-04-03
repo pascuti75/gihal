@@ -107,3 +107,41 @@ composer require twbs/bootstrap-icons
 *** liberia para pdf: DomPDF
 
 composer require barryvdh/laravel-dompdf
+
+*************************************************************
+para configurar apache y virtualhost
+*************************************************************
+Open XAMPP and click on the "Apache Config" button. Select "httpd.conf" to open the Apache configuration file.
+
+Add the following lines to the end of the file to configure Apache to serve your Laravel 9 project:
+
+<Directory "C:/xampp/htdocs/gihal/public">
+    AllowOverride All
+</Directory>
+
+
+para configurar el virtualhost
+
+Open the httpd-vhosts.conf file located in the apache\conf\extra directory of your XAMPP installation. You can do this by opening the file in a text editor or by clicking the "Apache Config" button in the XAMPP control panel and selecting "httpd-vhosts.conf".
+
+Add the following lines at the end of the file to define your virtual host:
+
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs/gihal/public"
+    ServerName gihal.test
+    <Directory "C:/xampp/htdocs/gihal/public">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+Replace myproject with the name of your project and C:/xampp/htdocs with the path to your XAMPP installation directory.
+
+Save the file and close it.
+
+Open the hosts file located in the C:\Windows\System32\drivers\etc directory. You can do this by opening the file in a text editor with administrator privileges.
+
+Add the following line to the end of the file to map your domain name to the localhost IP address:
+
+127.0.0.1 gihal.test
+
+Open your browser and go to http://gihal.test. You should see the Laravel 9 welcome page.

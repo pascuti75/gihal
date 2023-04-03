@@ -26,6 +26,9 @@ use App\Http\Controllers\OperacionController;
 //Importamos la clase ConsultaController
 use App\Http\Controllers\ConsultaController;
 
+//Importamos la clase AutocompletarController
+use App\Http\Controllers\AutocompletarController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,23 +45,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-/*
-
-//acceso al index de ubicaciones
-Route::get('/ubicacion', function () {
-    return view('ubicacion.index');
-});
-
-//esta vez la redireccion es por clase (en el controlador UbicacionController). La clase es UbicacionController y el metodo create.
-Route::get('/ubicacion/create',[UbicacionController::class,'create']);
-*/
-//IMPORTANTE. Para acceder a todas las rutas de una clase en vez de ir una por una como estamos haciendo antes podemos hacer esto
 
 //definimos las rutas de auth pero indicamos la que no queremos utilizar
 Auth::routes(['register' => false, 'reset' => false]);
 
-
-//Route::get('/home', [UbicacionController::class, 'index'])->name('home');
 
 
 //restriccion de acceso a routes por usuario autententicado y permiso esAdministrador
@@ -90,6 +80,7 @@ Route::group(['middleware' => ['auth', 'es-consultor']], function () {
     Route::get('/consulta/pdf', [ConsultaController::class, 'pdf'])->name('consulta.pdf');
     Route::get('/consulta', [ConsultaController::class, 'index'])->name('consulta.index');
     Route::get('/consulta/{operacion}', [ConsultaController::class, 'show'])->name('consulta.show');
+    Route::post('/autocompletar/{campo}', [AutocompletarController::class, 'search'])->name('autocompletar.autosearch');;
 });
 
 

@@ -22,6 +22,7 @@
     <div class="collapse show" id="collapseFilters">
         <div class="card card-body">
             <form method="GET">
+                {{ csrf_field() }}
                 <div class="form-group row mb-2">
 
                     <div class="col-md-2">
@@ -29,6 +30,7 @@
                             <input type="text" id="cod_interno" name="cod_interno" placeholder="Cod. Interno" class="form-control" value="{{Request::capture()->get('cod_interno')!=null ? Request::capture()->get('cod_interno') : ''}}">
                             <button class="btn btn-outline-secondary" type="button" id="reset_cod_interno"><i class="fa fa-times" aria-hidden="true"></i></button>
                         </div>
+                        <div id="cod_interno_list"></div>
                     </div>
 
                     <div class="col-md-4">
@@ -129,12 +131,14 @@
                             <input type="text" id="product_number" name="product_number" placeholder="Product Number" class="form-control" value="{{Request::capture()->get('product_number')!=null ? Request::capture()->get('product_number') : ''}}">
                             <button class="btn btn-outline-secondary" type="button" id="reset_product_number"><i class="fa fa-times" aria-hidden="true"></i></button>
                         </div>
+                        <div id="product_number_list"></div>
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
                             <input type="text" id="num_serie" name="num_serie" placeholder="Número de Serie" class="form-control" value="{{Request::capture()->get('num_serie')!=null ? Request::capture()->get('num_serie') : ''}}">
                             <button class="btn btn-outline-secondary" type="button" id="reset_num_serie"><i class="fa fa-times" aria-hidden="true"></i></button>
                         </div>
+                        <div id="num_serie_list"></div>
                     </div>
 
                 </div>
