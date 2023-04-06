@@ -59,7 +59,7 @@ class GestionUbicacionesTest extends TestCase
         $response->assertStatus(302);
         //redirige a login
         $response->assertRedirect('home');
-        //accedemos a administracion de usuarios
+        //accedemos a gestión de ubicaciones
         $response = $this->get('/ubicacion');
         //obtiene el código de redirección a página no permitida
         $response->assertStatus(403);
@@ -211,7 +211,7 @@ class GestionUbicacionesTest extends TestCase
         $gestor = $this->getGestorUser();
         //creamos una ubicacion aleatoria
         $ubicacion = Ubicacion::factory()->create();
-        //peticion put para editar el usuario aleatorio dejando la dirección vacía para que salte la validación
+        //peticion put para editar la ubicación aleatoria dejando la dirección vacía para que salte la validación
         $response = $this->actingAs($gestor)->put(
             '/ubicacion/' . $ubicacion->id,
             [
