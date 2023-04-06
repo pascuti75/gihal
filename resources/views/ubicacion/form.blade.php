@@ -31,7 +31,7 @@
 
     <div class="form-group">
         <label for="planta">Planta:</label>
-        <input type="text" class="form-control" name="planta" id="planta" value=" {{ old('planta', isset($ubicacion->planta)?$ubicacion->planta:old('planta')) }}">
+        <input type="text" class="form-control" name="planta" id="planta" value="{{ old('planta', isset($ubicacion->planta)?$ubicacion->planta:old('planta')) }}">
     </div>
 
 

@@ -12,24 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     */
-
-
-    /*
-    public function index(Request $request)
-    {
-        if ($request->filled('search')) {
-            $users = User::search($request->search)->paginate(5);
-        } else {
-            $users = User::paginate(5);
-        }
-
-        return view('usuario.index', compact('users'));
-    }
-*/
-
+ 
 
     public function index(Request $request)
     {
@@ -49,22 +32,7 @@ class UserController extends Controller
     }
 
 
-    /*
-    public function index(Request $request)
-    {
 
-        if ($request->filled('search')) {
-            $datos['users']  = User::search($request->search)->get();
-        } else {
-            $datos['users'] = User::paginate(5);
-        }
-        //$datos['users'] = User::paginate(5);
-
-        //se redirige  a la vista /ubicacion/index
-        
-        return view('usuario.index', $datos);
-    }
-     */
 
 
     /**
