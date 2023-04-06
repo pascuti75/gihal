@@ -145,3 +145,14 @@ Add the following line to the end of the file to map your domain name to the loc
 127.0.0.1 gihal.test
 
 Open your browser and go to http://gihal.test. You should see the Laravel 9 welcome page.
+
+
+/***********************/
+
+Testing
+
+para el testeo vamos a utilizar una base ded atos en memoria. pare eso editamos el fichero phpunit.xml y 
+descomenatmos lo siguiente:
+
+ <!-- <env name="DB_CONNECTION" value="sqlite"/> -->
+ <!-- <env name="DB_DATABASE" value=":memory:"/> -->
