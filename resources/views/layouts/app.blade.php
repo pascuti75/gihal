@@ -15,10 +15,11 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" href="{{ url('/bootstrap/bootstrap.css') }}">
+    <script src="{{ url('/bootstrap/bootstrap.js')}}"></script>
 
     <!-- estilos estaticos -->
     <link rel="stylesheet" type="text/css" href="{{ url('/css/app.css') }}">
@@ -31,8 +32,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
+    <!-- @vite(['resources/sass/app.scss', 'resources/js/app.js'])-->
+  
 </head>
 
 <body class="mb-4">

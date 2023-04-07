@@ -46,6 +46,10 @@ Route::get('/', function () {
 });
 
 
+Route::get('/phpinfo', function () {
+    phpinfo();
+});
+
 //definimos las rutas de auth pero indicamos la que no queremos utilizar
 Auth::routes(['register' => false, 'reset' => false]);
 
