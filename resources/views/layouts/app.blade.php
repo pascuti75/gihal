@@ -90,6 +90,9 @@
                             <a class="nav-link" href="{{ route('consulta.index') }}">{{ __('Consultas') }}</a>
                         </li>
                         @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ URL::to('/ayuda') }}">{{ __('Ayuda') }}</a>
+                        </li>
                     </ul>
                     @endif
 
