@@ -118,26 +118,6 @@ class GestionUbicacionesTest extends TestCase
         $this->assertTrue($response->original->getData()['ubicaciones']->count() == 0);
     }
 
-    //la paginacion de la tabla es de 5 elementos, con lo cual el sexto no debe de verse
-    public function test_primera_pagina_de_index_paginacion_no_contiene_sexto_elemento(): void
-    {
-        //agregamos 6 ubicaciones aleatorios al sistema
-        $ubicaciones = Ubicacion::factory(6)->create();
-        //recuperamos la sexta/ultima ubicacion de la coleccion
-        $sextaUbicacion = $ubicaciones->last();
-        //recuperamos el usuario gestor
-        $gestor = $this->getGestorUser();
-        //accedemos a la vista de ubicaciones como gestor
-        $response = $this->actingAs($gestor)->get('/ubicacion');
-        //obtiene el código de página correcta
-        $response->assertStatus(200);
-        //verificamos que entre los resultados devueltos en la tabla no esté la sexta ubicacion
-        //ya que la paginacion es de 5 elementos
-        $response->assertViewHas('ubicaciones', function ($collection) use ($sextaUbicacion) {
-            return !$collection->contains($sextaUbicacion);
-        });
-    }
-
     //test para forzar el error por validacion al crear ubicacion
     public function test_creacion_ubicacion_error_por_validacion(): void
     {

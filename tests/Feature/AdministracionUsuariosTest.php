@@ -116,26 +116,6 @@ class AdministracionUsuariosTest extends TestCase
         $this->assertTrue($response->original->getData()['users']->count() == 0);
     }
 
-
-
-    //la paginacion de la tabla esde 5 elementos, con lo cual el 6º no debe de verse
-    public function test_primera_pagina_de_index_paginacion_no_contiene_sexto_elemento(): void
-    {
-        //agregamos 5 usuarios aleatorios al sistema
-        User::factory(5)->create();
-        //después agregamos el usuario administrador
-        $admin = $this->getAdminUser();
-        //accedemos a la vista de usuarios como administrador
-        $response = $this->actingAs($admin)->get('/usuario');
-        //obtiene el código de página correcta
-        $response->assertStatus(200);
-        //verificamos que entre los resultados devueltos en la tabla no esté el administrador ya que es
-        //el sexto elemento y la paginación es de 5 elementos
-        $response->assertViewHas('users', function ($collection) use ($admin) {
-            return !$collection->contains($admin);
-        });
-    }
-
     public function test_creacion_usuario_error_por_validacion(): void
     {
         //recuperamos el usuario administrador

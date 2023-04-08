@@ -85,13 +85,13 @@ class EquipoController extends Controller
         $equipo->save();
 
         //creamos la operacion de almacenaje asociada a a creacion del equipo
+       
         $operacion  = new Operacion();
         $operacion->fecha_operacion = now()->format('Y-m-d H:i:s');
         $operacion->tipo_operacion = 'almacenaje';
         $operacion->id_equipo = $equipo->id;
         $operacion->id_ubicacion = 1; //la ubicacion 1 siempre debe de ser el almacen
         $operacion->save();
-
 
         return redirect()->action([EquipoController::class, 'index'])->with('mensaje', 'El equipo se ha creado correctamente');
     }

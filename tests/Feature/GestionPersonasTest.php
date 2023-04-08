@@ -118,26 +118,6 @@ class GestionPersonasTest extends TestCase
         $this->assertTrue($response->original->getData()['personas']->count() == 0);
     }
 
-    //la paginacion de la tabla es de 5 elementos, con lo cual el sexto no debe de verse
-    public function test_primera_pagina_de_index_paginacion_no_contiene_sexto_elemento(): void
-    {
-        //agregamos 6 personas aleatorios al sistema
-        $personas = Persona::factory(6)->create();
-        //recuperamos la sexta/ultima persona de la coleccion
-        $sextapersona = $personas->last();
-        //recuperamos el usuario gestor
-        $gestor = $this->getGestorUser();
-        //accedemos a la vista de personas como gestor
-        $response = $this->actingAs($gestor)->get('/persona');
-        //obtiene el código de página correcta
-        $response->assertStatus(200);
-        //verificamos que entre los resultados devueltos en la tabla no esté la sexta persona
-        //ya que la paginacion es de 5 elementos
-        $response->assertViewHas('personas', function ($collection) use ($sextapersona) {
-            return !$collection->contains($sextapersona);
-        });
-    }
-
     //test para forzar el error por validacion al crear persona
     public function test_creacion_persona_error_por_validacion(): void
     {

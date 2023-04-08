@@ -60,7 +60,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="product_number">Product Number:</label>
-                    <input type="text" class="form-control" name="product_number" id="product_number" value=" {{ old('product_number', isset($equipo->product_number)?$equipo->product_number:old('product_number')) }}">
+                    <input type="text" class="form-control" name="product_number" id="product_number" value="{{ old('product_number', isset($equipo->product_number)?$equipo->product_number:old('product_number')) }}">
                 </div>
             </div>
             <div class="col">
@@ -83,7 +83,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="cod_externo">Código externo:</label>
-                    <input type="text" class="form-control" name="cod_externo" id="cod_externo" value=" {{ old('cod_externo', isset($equipo->cod_externo)?$equipo->cod_externo:old('cod_externo')) }}">
+                    <input type="text" class="form-control" name="cod_externo" id="cod_externo" value="{{ old('cod_externo', isset($equipo->cod_externo)?$equipo->cod_externo:old('cod_externo')) }}">
                 </div>
             </div>
         </div>

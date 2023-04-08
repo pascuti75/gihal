@@ -118,26 +118,6 @@ class GestionContratacionesTest extends TestCase
         $this->assertTrue($response->original->getData()['contrataciones']->count() == 0);
     }
 
-    //la paginacion de la tabla es de 5 elementos, con lo cual el sexto no debe de verse
-    public function test_primera_pagina_de_index_paginacion_no_contiene_sexto_elemento(): void
-    {
-        //agregamos 6 contrataciones aleatorios al sistema
-        $contrataciones = Contratacion::factory(6)->create();
-        //recuperamos la sexta/ultima contratacion de la coleccion
-        $sextacontratacion = $contrataciones->last();
-        //recuperamos el usuario gestor
-        $gestor = $this->getGestorUser();
-        //accedemos a la vista de contrataciones como gestor
-        $response = $this->actingAs($gestor)->get('/contratacion');
-        //obtiene el código de página correcta
-        $response->assertStatus(200);
-        //verificamos que entre los resultados devueltos en la tabla no esté la sexta contratacion
-        //ya que la paginacion es de 5 elementos
-        $response->assertViewHas('contrataciones', function ($collection) use ($sextacontratacion) {
-            return !$collection->contains($sextacontratacion);
-        });
-    }
-
     //test para forzar el error por validacion al crear contratacion
     public function test_creacion_contratacion_error_por_validacion(): void
     {

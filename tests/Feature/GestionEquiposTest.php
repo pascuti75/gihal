@@ -6,9 +6,11 @@ use App\Models\Equipo;
 use App\Models\User;
 use App\Models\Contratacion;
 use App\Models\TipoEquipo;
+use App\Models\Ubicacion;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class GestionEquiposTest extends TestCase
@@ -121,7 +123,7 @@ class GestionEquiposTest extends TestCase
         $this->assertTrue($response->original->getData()['equipos']->count() == 0);
     }
 
-    
+
     //test para forzar el error por validacion al crear equipo
     public function test_creacion_equipo_error_por_validacion(): void
     {
@@ -152,22 +154,66 @@ class GestionEquiposTest extends TestCase
     {
         //recuperamos el usuario agestor
         $gestor = $this->getGestorUser();
-        //peticion post para crear el equipo
+
+        //creamos la ubicacion almacen para la operacion de almacenaje que se crea en paralelo al equipo
+        $ubicacion = Ubicacion::factory()->create([
+            'id' => 1,
+        ]);
+
+        //creamos un tipo de equipo para poder asociarlo con el equipo
+        $tipo_equipo = TipoEquipo::factory()->create();
+
+        //creamos an contratacion para poder asociarla con el equipo
+        $contratacion = Contratacion::factory()->create();
+
+        //peticion post para crear el equipo cómo gestor
         $equipo = [
-            'nombre' => 'nombre test 1',
-            'apellidos' => 'apellidos test 1',
-            'equipo' => 'interno'
+            'cod_interno' => 'cod_interno test 1',
+            'cod_externo' => 'cod_externo test 1',
+            'marca' => 'marca test 1',
+            'modelo' => 'modelo test 1',
+            'product_number' => 'product_number test 1',
+            'num_serie' => 'num_serie test 1',
+            'id_tipo_equipo' =>  $tipo_equipo->id,
+            'id_contratacion' =>  $contratacion->id
         ];
+
         $response = $this->actingAs($gestor)->post('/equipo', $equipo);
         //obtiene el código de redirección
         $response->assertStatus(302);
         //redirige a equipo
         $response->assertRedirect('equipo');
-        //comprobamos que eel equipo creada exista en la tabla de la base de datos
+        //comprobamos que el equipo creado exista en la tabla de la base de datos
+
         $this->assertDatabaseHas('equipos',  [
-            'nombre' => $equipo['nombre'],
-            'apellidos' => $equipo['apellidos'],
-            'equipo' => $equipo['equipo']
+            'cod_interno' => $equipo['cod_interno'],
+            'cod_externo' => $equipo['cod_externo'],
+            'marca' => $equipo['marca'],
+            'modelo' => $equipo['modelo'],
+            'product_number' => $equipo['product_number'],
+            'num_serie' => $equipo['num_serie'],
+            'id_tipo_equipo' => $equipo['id_tipo_equipo'],
+            'id_contratacion' => $equipo['id_contratacion'],
+        ]);
+
+
+        //obtenemos el equipo que acabamos de crear
+        $equipo = DB::table('equipos')
+            ->where('cod_interno',  $equipo['cod_interno'])
+            ->where('cod_externo', $equipo['cod_externo'])
+            ->where('marca', $equipo['marca'])
+            ->where('modelo', $equipo['modelo'])
+            ->where('product_number', $equipo['product_number'])
+            ->where('num_serie', $equipo['num_serie'])
+            ->first();
+
+        $id_equipo = $equipo->id;
+
+        //comprobamos que se ha creado correctamente la operacion de almacenaje asociada a la creacion del equipo
+        $this->assertDatabaseHas('operaciones',  [
+            'tipo_operacion' => 'almacenaje',
+            'id_equipo' => $id_equipo,
+            'id_ubicacion' => 1
         ]);
     }
 
@@ -176,16 +222,22 @@ class GestionEquiposTest extends TestCase
     {
         //recuperamos el usuario gestor
         $gestor = $this->getGestorUser();
-        //creamos una equipo aleatorio
-        $equipo = Equipo::factory()->create();
+        //creamos un tipo de equipo para poder asociarlo con el equipo
+        $tipo_equipo = TipoEquipo::factory()->create();
+        //creamos una equipo aleatorio asociado al tipo de equipo anterior
+        $equipo = Equipo::factory()->create(['id_tipo_equipo' => $tipo_equipo->id]);
         //peticion get para editar el equipo aleatorio
         $response = $this->actingAs($gestor)->get('/equipo/' . $equipo->id . '/edit');
         //obtiene el código de página correcta
         $response->assertStatus(200);
         //comprobamos que los campos se han completado en el html recuperado en el response
-        $response->assertSee('value="' . $equipo->nombre . '"', false);
-        $response->assertSee('value="' . $equipo->apellidos . '"', false);
-        $response->assertSee('value="' . $equipo->equipo . '"', false);
+        $response->assertSee('value="' . $equipo->marca . '"', false);
+        $response->assertSee('value="' . $equipo->modelo . '"', false);
+        $response->assertSee('value="' . $equipo->product_number . '"', false);
+        $response->assertSee('value="' . $equipo->num_serie . '"', false);
+        $response->assertSee('value="' . $equipo->cod_interno . '"', false);
+        $response->assertSee('value="' . $equipo->cod_externo . '"', false);
+        $response->assertSee('value="' . $equipo->id_tipo_equipo . '" selected', false);
     }
 
     //test para forzar el error por validacion al editar equipo
@@ -193,21 +245,27 @@ class GestionEquiposTest extends TestCase
     {
         //recuperamos el usuario gestor
         $gestor = $this->getGestorUser();
-        //creamos una equipo aleatorio
-        $equipo = Equipo::factory()->create();
-        //peticion put para editar el equipo aleatorio dejando el tipo equipol vacío para que salte la validación
+        //creamos un tipo de equipo para poder asociarlo con el equipo
+        $tipo_equipo = TipoEquipo::factory()->create();
+        //creamos una equipo aleatorio asociado al tipo de equipo anterior
+        $equipo = Equipo::factory()->create(['id_tipo_equipo' => $tipo_equipo->id]);
+        //peticion put para editar el equipo aleatorio dejando el id_tipo_equipo vacío para que salte la validación
         $response = $this->actingAs($gestor)->put(
             '/equipo/' . $equipo->id,
             [
-                'nombre' => $equipo->nombre,
-                'apellidos' => $equipo->apellidos,
-                'equipo' => ''
+                'cod_interno' => $equipo->cod_interno,
+                'cod_externo' => $equipo->cod_externo,
+                'marca' => $equipo->marca,
+                'modelo' => $equipo->modelo,
+                'product_number' => $equipo->product_number,
+                'num_serie' => $equipo->num_serie,
+                'id_tipo_equipo' => null
             ]
         );
         //obtiene el código de redirección
         $response->assertStatus(302);
         //nos va a indicar que hay un error en el equipo
-        $response->assertSessionHasErrors('equipo');
+        $response->assertSessionHasErrors('id_tipo_equipo');
     }
 
     //test para editar correctamente una equipo
@@ -215,27 +273,37 @@ class GestionEquiposTest extends TestCase
     {
         //recuperamos el usuario gestor
         $gestor = $this->getGestorUser();
-        //creamos una equipo aleatorio
-        $equipo = Equipo::factory()->create();
+        //creamos un tipo de equipo para poder asociarlo con el equipo
+        $tipo_equipo = TipoEquipo::factory()->create();
+        //creamos una equipo aleatorio asociado al tipo de equipo anterior
+        $equipo = Equipo::factory()->create(['id_tipo_equipo' => $tipo_equipo->id]);
 
         //peticion put para editar el equipo aleatorio
         $response = $this->actingAs($gestor)->put(
             '/equipo/' . $equipo->id,
             [
-                'nombre' => $equipo->nombre,
-                'apellidos' => $equipo->apellidos,
-                'equipo' => 'externo'
+                'cod_interno' => $equipo->cod_interno,
+                'cod_externo' => $equipo->cod_externo,
+                'marca' => $equipo->marca,
+                'modelo' => $equipo->modelo,
+                'product_number' => '1234567890',
+                'num_serie' => $equipo->num_serie,
+                'id_tipo_equipo' => $tipo_equipo->id
             ]
         );
         //obtiene el código de redirección
         $response->assertStatus(302);
         //redirige a equipo
         $response->assertRedirect('equipo');
-        //comprobamos que el equipo editada exista en la tabla de la base de datos
+        //comprobamos que el equipo editado exista en la tabla de la base de datos
         $this->assertDatabaseHas('equipos',  [
-            'nombre' => $equipo['nombre'],
-            'apellidos' => $equipo['apellidos'],
-            'equipo' => 'externo'
+            'cod_interno' => $equipo['cod_interno'],
+            'cod_externo' => $equipo['cod_externo'],
+            'marca' => $equipo['marca'],
+            'modelo' => $equipo['modelo'],
+            'product_number' => '1234567890',
+            'num_serie' => $equipo['num_serie'],
+            'id_tipo_equipo' => $equipo['id_tipo_equipo']
         ]);
     }
 
