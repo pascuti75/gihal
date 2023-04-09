@@ -3,32 +3,32 @@
         FICHA DE TIPO DE EQUIPO
     </legend>
 
-
+    {{-- Seccion para mostrar los errores de validacion --}}
     @if(count($errors)>0)
     <div class="alert alert-danger" role="alert">
         <ul>
             @foreach( $errors->all() as $error)
-
             <li> {{ $error }} </li>
             @endforeach
         </ul>
     </div>
     @endif
 
+    {{-- Cargamos todos los campos del formulario y su contenido en el caso de la edición o la validación--}}
     <div class="form-group">
         <label for="cod_tipo_equipo">Código:</label>
-        <input type="text" class="form-control" name="cod_tipo_equipo" id="cod_tipo_equipo" value="{{ old('cod_tipo_equipo', isset($tipo_equipo->cod_tipo_equipo)?$tipo_equipo->cod_tipo_equipo:old('cod_tipo_equipo')) }}" @if($modo=="editar" ) readonly @endif>    
+        <input type="text" class="form-control" name="cod_tipo_equipo" id="cod_tipo_equipo" value="{{ old('cod_tipo_equipo', isset($tipo_equipo->cod_tipo_equipo)?$tipo_equipo->cod_tipo_equipo:old('cod_tipo_equipo')) }}" @if($modo=="editar" ) readonly @endif>
     </div>
 
     <div class="form-group">
         <label for="tipo">Tipo:</label>
-        <input type="text" class="form-control" name="tipo" id="tipo" value="{{ old('tipo', isset($tipo_equipo->tipo)?$tipo_equipo->tipo:old('tipo')) }}"> 
+        <input type="text" class="form-control" name="tipo" id="tipo" value="{{ old('tipo', isset($tipo_equipo->tipo)?$tipo_equipo->tipo:old('tipo')) }}">
     </div>
 
 
 </fieldset>
 
-
 <br>
+{{-- Definimos los botones Aceptar y Cancelar --}}
 <input type="submit" class="btn btn-success" value="Aceptar">
 <a href="{{ url('/tipo_equipo') }}" class="btn btn-primary">Cancelar</a>

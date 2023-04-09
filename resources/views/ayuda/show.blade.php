@@ -1,6 +1,12 @@
+{{-- Plantilla blade para mostrar la ayuda --}}
+
+{{-- Extendemos la plantilla base layouts.app --}}
 @extends('layouts.app')
 
+{{-- Definimos la sección content --}}
 @section('content')
+
+{{-- En la plantilla vamos a mostrar/ocultar secciones html en funcion del tipo de perfil de accesos a la aplicacion--}}
 
 <div class="container">
     <h1 class="text-center">AYUDA</h1>
@@ -282,6 +288,7 @@
     @endif
 </div>
 
+{{-- Cargamos la funcionalidad Javascript --}}
 <script>
     $(document).ready(function() {
 

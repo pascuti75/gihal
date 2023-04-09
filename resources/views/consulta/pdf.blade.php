@@ -1,3 +1,4 @@
+{{-- Plantilla blade con la estructura del documento pdf --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +9,7 @@
 
     <title>Informe</title>
 
+    {{-- Definimos los estilos de la plantilla --}}
     <style>
         body {
             font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -66,12 +68,14 @@
 
 <body>
 
+    {{-- Definimos el pie de pagina con la fecha y el numero de pagina --}}
     <footer>
         GIHAL. {{ Carbon\Carbon::now()->format('d-m-Y H:i:s')}}<span class="pagenum"></span>
     </footer>
     <main>
         <h2 class="text-center">INFORME</h2>
         <br>
+        {{-- Definimos la tabla para mostrar los resultados --}}
         <table class="table table-light table-wide">
 
             <thead class="cabecera">
@@ -87,6 +91,7 @@
                     <th>Técnico</th>
             </thead>
             <tbody>
+                {{-- Cargamos el contenido de la tabla con cada una de las operaciones recuperadas desde el controlador --}}
                 @foreach( $operaciones as $operacion)
                 <tr>
                     <td>{{ $operacion->fecha_operacion }}</td>

@@ -3,17 +3,18 @@
         FICHA DE UBICACIÓN
     </legend>
 
+    {{-- Seccion para mostrar los errores de validacion --}}
     @if(count($errors)>0)
     <div class="alert alert-danger" role="alert">
         <ul>
             @foreach( $errors->all() as $error)
-
             <li> {{ $error }} </li>
             @endforeach
         </ul>
     </div>
     @endif
 
+    {{-- Cargamos todos los campos del formulario y su contenido en el caso de la edición o la validación--}}
     <div class="form-group">
         <label for="servicio">Servicio:</label>
         <input type="text" class="form-control" name="servicio" id="servicio" value="{{ old('servicio', isset($ubicacion->servicio)?$ubicacion->servicio:old('servicio')) }}">
@@ -37,7 +38,7 @@
 
 </fieldset>
 
-
 <br>
+{{-- Definimos los botones Aceptar y Cancelar --}}
 <input type="submit" class="btn btn-success" value="Aceptar">
 <a href="{{ url('/ubicacion') }}" class="btn btn-primary">Cancelar</a>

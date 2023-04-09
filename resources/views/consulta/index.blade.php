@@ -1,10 +1,15 @@
+{{-- Plantilla blade para mostrar la vista de listado de operaciones en la consulta --}}
+
+{{-- Extendemos la plantilla base layouts.app --}}
 @extends('layouts.app')
 
+{{-- Definimos la sección content --}}
 @section('content')
 <div class="container-fluid">
 
     <h1 class="text-center">CONSULTAS</h1>
 
+    {{-- seccion para mensajes de error --}}
     @if(count($errors)>0)
     <div class="alert alert-danger" role="alert">
         <ul>
@@ -16,11 +21,14 @@
     </div>
     @endif
 
+    {{-- boton para mostrar/ocultar los filtros --}}
     <button class="btn btn-outline-danger mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
         Mostrar/Ocultar Filtros
     </button>
     <div class="collapse show" id="collapseFilters">
         <div class="card card-body">
+
+            {{-- formularios de filtros --}}
             <form method="GET">
                 {{ csrf_field() }}
                 <div class="form-group row mb-2">
@@ -167,8 +175,10 @@
     <br>
 
     <div class="card card-body">
-        <table class="table table-light table-wide">
 
+        {{-- tabla para mostrar los resultados --}}
+        <table class="table table-light table-wide">
+            {{-- encabezado --}}
             <thead class="thead-light">
                 <tr>
                     <th>Fecha</th>
@@ -182,7 +192,9 @@
                     <th class="action-column text-nowrap text-center">Acciones</th>
                 </tr>
             </thead>
+            {{-- cuerpo de la tabla --}}
             <tbody>
+                {{-- recorremos las operaciones obtenidos desde el controlador para montar el contenido la tabla --}}
                 @foreach( $operaciones as $operacion)
                 <tr>
                     <td>{{ $operacion->fecha_operacion }}</td>
@@ -202,12 +214,13 @@
         </table>
         <div class="form-group row mb-2">
 
-
+            {{-- totales y paginacion --}}
             <div class="col-md-11">
                 {!! $operaciones->links() !!}
                 {{ 'Total registros: '. $operaciones->total() }}
             </div>
             <div class="col-md-1 text-right">
+                {{--botón para exportar a pdf pasandole a la ruta toda la cadena del filtros incluidas en el QUERY STRING --}}
                 <a href="{{ route('consulta.pdf').'?'.$_SERVER['QUERY_STRING'] }}" class="btn btn-warning">Exportar a PDF</a>
             </div>
 
@@ -215,6 +228,7 @@
     </div>
 </div>
 
+{{-- Cargamos la funcionalidad Javascript --}}
 <script>
     $(document).ready(function() {
         initConsultaIndex();

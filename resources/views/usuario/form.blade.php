@@ -3,19 +3,18 @@
         FICHA DE USUARIO
     </legend>
 
-
+    {{-- Seccion para mostrar los errores de validacion --}}
     @if(count($errors)>0)
     <div class="alert alert-danger" role="alert">
         <ul>
             @foreach( $errors->all() as $error)
-
             <li> {{ $error }} </li>
             @endforeach
         </ul>
     </div>
     @endif
 
-
+    {{-- Cargamos todos los campos del formulario y su contenido en el caso de la edición o la validación--}}
     <div class="form-group">
         <label for="username">Nombre de usuario:</label>
         <input type="text" class="form-control" name="username" id="username" value="{{ isset($user->username)?$user->username:old('username') }}" @if($modo=="editar" ) readonly @endif>
@@ -55,7 +54,7 @@
 
 </fieldset>
 
-
 <br>
+{{-- Definimos los botones Aceptar y Cancelar --}}
 <input type="submit" class="btn btn-success" value="Aceptar">
 <a href="{{ url('/usuario') }}" class="btn btn-primary">Cancelar</a>

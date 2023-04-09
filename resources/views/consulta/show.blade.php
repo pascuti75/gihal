@@ -1,5 +1,9 @@
+{{-- Plantilla blade para mostrar la ficha de la operacion --}}
+
+{{-- Extendemos la plantilla base layouts.app --}}
 @extends('layouts.app')
 
+{{-- Definimos la sección content --}}
 @section('content')
 <div class="container">
 
@@ -8,6 +12,7 @@
             FICHA DE OPERACIÓN
         </legend>
 
+        {{--Cargamos cada uno de los campos con la información de la operacion obtenidos desde el controlador --}}
         <div class="form-group row mb-2">
             <div class="col-md-4">
                 <label for="tipo_operacion">Tipo de operación:</label>
@@ -42,10 +47,12 @@
         </div>
     </fieldset>
     <br>
+    {{-- Definimos el boton volver sobre la pagina que hemos accedido --}}
     <a href="{{ url()->previous() }}" class="btn btn-success" id="btn_volver">Volver</a>
 
 </div>
 
+{{-- Cargamos la funcionalidad Javascript --}}
 <script>
     $(document).ready(function() {
         initConsultaShow();

@@ -3,7 +3,7 @@
         FICHA DE EQUIPO
     </legend>
 
-
+    {{-- Seccion para mostrar los errores de validacion --}}
     @if(count($errors)>0)
     <div class="alert alert-danger" role="alert">
         <ul>
@@ -13,6 +13,8 @@
         </ul>
     </div>
     @endif
+
+    {{-- Cargamos todos los campos del formulario y su contenido en el caso de la edición o la validación--}}
     <div class="container">
         <div class="row">
             <div class="col">
@@ -92,8 +94,7 @@
     </div>
 
 </fieldset>
-
-
 <br>
+{{-- Definimos los botones Aceptar y Cancelar --}}
 <input type="submit" class="btn btn-success" value="Aceptar">
 <a href="{{ url('/equipo') }}" class="btn btn-primary">Cancelar</a>

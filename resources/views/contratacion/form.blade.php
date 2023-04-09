@@ -3,7 +3,7 @@
         FICHA DE CONTRATACIÓN
     </legend>
 
-
+    {{-- Seccion para mostrar los errores de validacion --}}
     @if(count($errors)>0)
     <div class="alert alert-danger" role="alert">
         <ul>
@@ -14,6 +14,7 @@
     </div>
     @endif
 
+    {{-- Cargamos todos los campos del formulario y su contenido en el caso de la edición o la validación--}}
     <div class="form-group">
         <label for="titulo">Título:</label>
         <input type="text" class="form-control" name="titulo" id="titulo" value="{{ old('titulo', isset($contratacion->titulo)?$contratacion->titulo:old('titulo')) }}">
@@ -42,14 +43,14 @@
         </div>
     </div>
 
-
 </fieldset>
 
-
 <br>
+{{-- Definimos los botones Aceptar y Cancelar --}}
 <input type="submit" class="btn btn-success" value="Aceptar">
 <a href="{{ url('/contratacion') }}" class="btn btn-primary">Cancelar</a>
 
+{{-- Cargamos la funcionalidad Javascript --}}
 <script>
     $(document).ready(function() {
         initContratacionForm();

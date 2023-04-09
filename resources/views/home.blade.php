@@ -1,5 +1,9 @@
+{{-- Plantilla blade de acceso a bienvenida cuando un usuario entra en la aplicacion --}}
+
+{{-- Extendemos la plantilla base layouts.app --}}
 @extends('layouts.app')
 
+{{-- Definimos la sección content --}}
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

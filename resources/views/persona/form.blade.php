@@ -3,7 +3,7 @@
         FICHA DE PERSONA
     </legend>
 
-
+    {{-- Seccion para mostrar los errores de validacion --}}
     @if(count($errors)>0)
     <div class="alert alert-danger" role="alert">
         <ul>
@@ -14,6 +14,7 @@
     </div>
     @endif
 
+    {{-- Cargamos todos los campos del formulario y su contenido en el caso de la edición o la validación--}}
     <div class="form-group">
         <label for="nombre">Nombre:</label>
         <input type="text" class="form-control" name="nombre" id="nombre" value="{{ old('nombre', isset($persona->nombre)?$persona->nombre:old('nombre')) }}">
@@ -37,7 +38,7 @@
 
 </fieldset>
 
-
 <br>
+{{-- Definimos los botones Aceptar y Cancelar --}}
 <input type="submit" class="btn btn-success" value="Aceptar">
 <a href="{{ url('/persona') }}" class="btn btn-primary">Cancelar</a>

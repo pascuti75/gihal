@@ -45,14 +45,14 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-
+/*
 Route::get('/phpinfo', function () {
     phpinfo();
 });
+*/
 
-//definimos las rutas de auth pero indicamos la que no queremos utilizar
+//definimos las rutas de auth pero indicamos la funcionalidad que no queremos utilizar (register y reset)
 Auth::routes(['register' => false, 'reset' => false]);
-
 
 
 //restriccion de acceso a routes por usuario autententicado y permiso esAdministrador
@@ -88,7 +88,7 @@ Route::group(['middleware' => ['auth', 'es-consultor']], function () {
 });
 
 
-//restriccion de acceso a routes por usuario autententicado  y acceso a home
+//restriccion de acceso a routes por usuario autententicado y acceso a home
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
         return view('home');

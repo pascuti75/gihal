@@ -3,7 +3,7 @@
         FICHA DE OPERACIÓN
     </legend>
 
-
+    {{-- Seccion para mostrar los errores de validacion --}}
     @if(count($errors)>0)
     <div class="alert alert-danger" role="alert">
         <ul>
@@ -14,6 +14,7 @@
     </div>
     @endif
 
+    {{-- Cargamos todos los campos del formulario y su contenido --}}
     <div class="row">
         <div class="col">
             <div class="form-group">
@@ -64,7 +65,7 @@
             <select class="form-select" name="id_ubicacion" id="id_ubicacion">
                 <option value="option_select" disabled selected>Seleccionar</option>
                 @foreach ($ubicaciones as $ubicacion)
-                <option value="{{$ubicacion->id}}"  {{isset($operacion->id_ubicacion ) ? (old('id_ubicacion',$operacion->id_ubicacion) == $ubicacion->id ? 'selected' : '') : (old('id_ubicacion') == $ubicacion->id ? 'selected' : '')}}>{{$ubicacion->servicio .' - '. 
+                <option value="{{$ubicacion->id}}" {{isset($operacion->id_ubicacion ) ? (old('id_ubicacion',$operacion->id_ubicacion) == $ubicacion->id ? 'selected' : '') : (old('id_ubicacion') == $ubicacion->id ? 'selected' : '')}}>{{$ubicacion->servicio .' - '. 
                     $ubicacion->dependencia .' - '. $ubicacion->direccion .' - ' . ' Planta ' . $ubicacion->planta }}</option>
                 @endforeach
             </select>
@@ -85,11 +86,12 @@
 
 </fieldset>
 
-
 <br>
+{{-- Definimos los botones Aceptar y Cancelar --}}
 <input type="submit" class="btn btn-success" value="Aceptar">
 <a href="{{ url('/operacion') }}" class="btn btn-primary">Cancelar</a>
 
+{{-- Cargamos la funcionalidad Javascript --}}
 <script>
     $(document).ready(function() {
         initOperacionForm();

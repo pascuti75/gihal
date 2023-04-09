@@ -1,15 +1,21 @@
+{{-- Plantilla blade para mostrar la vista de listado de equipos --}}
+
+{{-- Extendemos la plantilla base layouts.app --}}
 @extends('layouts.app')
 
+{{-- Definimos la sección content --}}
 @section('content')
 <div class="container">
 
     <h1 class="text-center">GESTIÓN DE EQUIPOS</h1>
 
+    {{-- seccion para mostrar los mensajes de exito --}}
     @if(Session::has('mensaje'))
     <div class="alert alert-success" role="alert">
         {{ Session::get('mensaje') }}
     </div>
     @endif
+    {{-- seccion para mostrar los mensajes de error --}}
     @if(Session::has('error') && Session::get('error')!=="")
     <div class="alert alert-danger" role="alert">
         {{ Session::get('error') }}
@@ -17,9 +23,10 @@
     @endif
 
 
-
+    {{-- Definición del boton Crear equipo --}}
     <a href="{{ url('/equipo/create') }}" class="btn btn-success">Crear equipo</a>
     <br><br>
+    {{-- Definición de la seccion de busqueda. se realiza mediante get por un evento submit --}}
     <form method="GET">
         <div class="input-group mb-3">
             <input type="search" name="query" id="query" value="{{ request()->get('query') }}" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="boton-buscar">
@@ -29,8 +36,8 @@
     </form>
 
     <div class="card card-body">
+        {{-- tabla para mostrar los resultados --}}
         <table class="table table-light">
-
             <thead class="thead-light">
                 <tr>
                     <th>#</th>
@@ -46,6 +53,7 @@
                 </tr>
             </thead>
             <tbody>
+                {{-- recorremos los equipos obtenidos desde el controlador para montar el contenido la tabla --}}
                 @foreach( $equipos as $equipo)
                 <tr>
                     <td>{{ $equipo->id }}</td>
@@ -55,6 +63,7 @@
                     <td>{{ $equipo->cod_externo }}</td>
                     <td>{{ $equipo->num_serie }}</td>
                     <td>{{ $equipo->product_number }}</td>
+                    {{-- definimos la columna de acciones --}}
                     <td class="text-center">
                         @if ($equipo->id_contratacion!=null)
                         <a class="btn btn-sm btn-outline-secondary" href="#" data-toggle="tooltip" title="{{ $equipo->contratacion->empresa.': '.$equipo->contratacion->titulo . 
@@ -76,11 +85,13 @@
                 @endforeach
             </tbody>
         </table>
+        {{-- totales y paginacion --}}
         {!! $equipos->links() !!}
         {{ 'Total registros: '. $equipos->total() }}
     </div>
 </div>
 
+{{-- Cargamos la funcionalidad Javascript --}}
 <script>
     $(document).ready(function() {
         initEquipoIndex();
