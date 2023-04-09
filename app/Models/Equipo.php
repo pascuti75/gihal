@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
 
+//Definición del modelo Equipo
 class Equipo extends Model
 {
+    //indicamos que es un modelo buscable mediante Laravel Scout
     use HasFactory, Searchable;
 
     //Determinamos la tabla que está relacionada al modelo
@@ -21,23 +23,23 @@ class Equipo extends Model
     ];
 
 
+    //definimos la relacion con el modelo tipoEquipo
     public function tipoEquipo()
     {
         return $this->hasOne(TipoEquipo::class, 'id', 'id_tipo_equipo');
     }
 
-
+    //definimos la relacion con el modelo contratacion
     public function contratacion()
     {
         return $this->hasOne(Contratacion::class, 'id', 'id_contratacion');
     }
 
-    //Relacion con operaciones
+    //definimos la relacion con el modelo operacion
     public function operaciones(): HasMany
     {
         return $this->hasMany(Operacion::class);
     }
-
 
     //campos que se van a utilizar en la busqueda
     public function toSearchableArray()

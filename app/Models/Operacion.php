@@ -23,22 +23,25 @@ class Operacion extends Model
         'id_ubicacion', 'id_persona', 'id_user'
     ];
 
-
+    //definimos la relacion con el modelo equipo
     public function equipo(): HasOne
     {
         return $this->hasOne(Equipo::class, 'id', 'id_equipo');
     }
 
+    //definimos la relacion con el modelo ubicacion
     public function ubicacion(): HasOne
     {
         return $this->hasOne(Ubicacion::class, 'id', 'id_ubicacion');
     }
 
+    //definimos la relacion con el modelo persona
     public function persona(): HasOne
     {
         return $this->hasOne(Persona::class, 'id', 'id_persona');
     }
 
+    //definimos la relacion con el modelo usuario
     public function user(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'id_user');
@@ -53,8 +56,9 @@ class Operacion extends Model
         ];
     }
 
-    //Query scope
+    //Definimos todos los métodos para definir query scope con las consultas predefinidas
 
+    //Query Scope para filtrar por el campo cod_interno del equipo
     public function scopeCodInterno($query, $cod_interno)
     {
         if ($cod_interno) {
@@ -64,7 +68,8 @@ class Operacion extends Model
         }
     }
 
-
+    //Query Scope para filtrar por el campo cod_interno del equipo y el campo activa = 'si' además de enlazar
+    //con otras consultas con la clausula OR
     public function scopeOrCodInternoActiva($query, $cod_interno)
     {
         if ($cod_interno) {
@@ -74,7 +79,7 @@ class Operacion extends Model
         }
     }
 
-
+    //Query Scope para filtrar por el campo tipo_operacion
     public function scopeTipoOperacion($query, $tipo_operacion)
     {
         if ($tipo_operacion) {
@@ -82,6 +87,8 @@ class Operacion extends Model
         }
     }
 
+    //Query Scope para filtrar por el campo tipo_operacion y el campo activa = 'si' además de enlazar
+    //con otras consultas con la clausula OR
     public function scopeOrTipoOperacionActiva($query, $tipo_operacion)
     {
         if ($tipo_operacion) {
@@ -89,7 +96,7 @@ class Operacion extends Model
         }
     }
 
-
+    //Query Scope para filtrar por el campo activa
     public function scopeActiva($query, $activa)
     {
         if ($activa && $activa == 'on') {
@@ -97,7 +104,7 @@ class Operacion extends Model
         }
     }
 
-
+    //Query Scope para filtrar por el campo tecnico
     public function scopeTecnico($query, $tecnico)
     {
         if ($tecnico) {
@@ -107,6 +114,8 @@ class Operacion extends Model
         }
     }
 
+    //Query Scope para filtrar por el campo tecnico y el campo activa = 'si' además de enlazar
+    //con otras consultas con la clausula OR
     public function scopeOrTecnicoActiva($query, $tecnico)
     {
         if ($tecnico) {
@@ -116,7 +125,7 @@ class Operacion extends Model
         }
     }
 
-
+    //Query Scope para filtrar por el campo persona
     public function scopePersona($query, $persona)
     {
         if ($persona) {
@@ -126,6 +135,8 @@ class Operacion extends Model
         }
     }
 
+    //Query Scope para filtrar por el campo persona y el campo activa = 'si' además de enlazar
+    //con otras consultas con la clausula OR
     public function scopeOrPersonaActiva($query, $persona)
     {
         if ($persona) {
@@ -135,7 +146,7 @@ class Operacion extends Model
         }
     }
 
-
+    //Query Scope para filtrar por el campo tipo_equipo del equipo
     public function scopeTipoEquipo($query, $tipo_equipo)
     {
         if ($tipo_equipo) {
@@ -145,6 +156,8 @@ class Operacion extends Model
         }
     }
 
+    //Query Scope para filtrar por el campo tipo_equipo del equipo y el campo activa = 'si' además de enlazar
+    //con otras consultas con la clausula OR
     public function scopeOrTipoEquipoActiva($query, $tipo_equipo)
     {
         if ($tipo_equipo) {
@@ -156,7 +169,7 @@ class Operacion extends Model
         }
     }
 
-
+    //Query Scope para filtrar por el campo ubicacion
     public function scopeUbicacion($query, $ubicacion)
     {
         if ($ubicacion) {
@@ -166,6 +179,8 @@ class Operacion extends Model
         }
     }
 
+    //Query Scope para filtrar por el campo ubicacion y el campo activa = 'si' además de enlazar
+    //con otras consultas con la clausula OR
     public function scopeOrUbicacionActiva($query, $ubicacion)
     {
         if ($ubicacion) {
@@ -175,7 +190,7 @@ class Operacion extends Model
         }
     }
 
-
+    //Query Scope para filtrar por el campo contratacion del equipo
     public function scopeContratacion($query, $contratacion)
     {
         if ($contratacion) {
@@ -187,7 +202,7 @@ class Operacion extends Model
         }
     }
 
-
+    //Query Scope para filtrar por inicio de fecha_operacion
     public function scopeFOperIni($query, $f_oper_ini)
     {
         if ($f_oper_ini) {
@@ -195,7 +210,7 @@ class Operacion extends Model
         }
     }
 
-
+    //Query Scope para filtrar por fin de fecha_operacion
     public function scopeFOperFin($query, $f_oper_fin)
     {
         if ($f_oper_fin) {
@@ -203,6 +218,7 @@ class Operacion extends Model
         }
     }
 
+    //Query Scope para filtrar por el campo marca del equipo
     public function scopeMarca($query, $marca)
     {
         if ($marca) {
@@ -212,6 +228,7 @@ class Operacion extends Model
         }
     }
 
+    //Query Scope para filtrar por el campo modelo del equipo
     public function scopeModelo($query, $modelo)
     {
         if ($modelo) {
@@ -221,6 +238,7 @@ class Operacion extends Model
         }
     }
 
+    //Query Scope para filtrar por el campo num_serie del equipo
     public function scopeNumSerie($query, $num_serie)
     {
         if ($num_serie) {
@@ -230,6 +248,7 @@ class Operacion extends Model
         }
     }
 
+    //Query Scope para filtrar por el campo product_number del equipo
     public function scopeProductNumber($query, $product_number)
     {
         if ($product_number) {

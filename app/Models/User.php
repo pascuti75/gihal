@@ -12,13 +12,10 @@ use Laravel\Scout\Searchable;
 
 class User extends Authenticatable
 {
+    //indicamos que es un modelo buscable mediante Laravel Scout
     use HasApiTokens, HasFactory, Notifiable, Searchable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    //fillable es para visualizar los campos de la tabla en las consultas sql
     protected $fillable = [
         'username',
         'password',
@@ -46,14 +43,8 @@ class User extends Authenticatable
     protected $casts = [];
 
 
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
 
-     //campos que se van a utilizar en la busqueda
-     
+    //campos que se van a utilizar en la busqueda
     public function toSearchableArray()
     {
         return [
