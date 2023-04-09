@@ -6,17 +6,10 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Contratacion;
 use App\Models\TipoEquipo;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Equipo>
- */
+//Definicion de factory para modelo Equipo
 class EquipoFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+       public function definition(): array
     {
         return [
             'cod_interno' => fake()->text(100),

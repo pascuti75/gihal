@@ -9,16 +9,10 @@ use App\Models\Ubicacion;
 use App\Models\Persona;
 use App\Models\User;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Operacion>
- */
+//Definicion de factory para modelo Operacion
 class OperacionFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+   
     public function definition(): array
     {
         return [
