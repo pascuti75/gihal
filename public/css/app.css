@@ -1,16 +1,20 @@
+/* estilo para el cuerpo de la pagina*/
 body {
     padding-bottom: 50px;
 }
 
+/* estilo para el pie de la pagina*/
 footer {
     background-color: #2b2b33;
     color: #fff;
 }
 
+/* estilo para la leyenda de la ficha*/
 .legend-form {
     font-size: 2rem;
 }
 
+/* estilo para el nombre de la aplicacion*/
 .gihal-name {
     padding: 30px 30px 0px 30px;
     font-size: 2rem;
@@ -22,15 +26,17 @@ footer {
     width: 160px;
 }
 
-
+/*  estilo para las tablas grandes */
 .table-wide {
     font-size: 13px;
 }
 
+/* clase para crear un ancho de 100px */
 .ancho-100 {
     width: 100px;
 }
 
+/* clase para crear un ancho de 50px */
 .ancho-50 {
     width: 50px;
 }
