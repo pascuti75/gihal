@@ -142,3 +142,4 @@ function initUsuarioIndex() {
         $("#boton-buscar").click();
     });
 }
+

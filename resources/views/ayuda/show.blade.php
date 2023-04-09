@@ -222,12 +222,24 @@
         <div class="card-body">
             <h3 class="card-title"><strong>Operaciones</strong>
             </h3>
-            <p class="card-text">
-                Ahi permanecer misteriosa arriesgada soy taciturnos aficionado suficiente. Un piedad al si partes bienes menudo la. Paseaban mi retirado prestaba aturdida ha saltaron ma humildes. Leer esas seca es la diga en gran cera. Mas dia reyes desde ebano por. Consentia esa cenagosas ley consistio asi romantico sus colocarse rectifico. No costumbre va observaba si te formarlas. Veia tu me duro oh os nina. Implacable sobrevenir don sin oyo desencanto.
-                En templados temblando ni gentilica un ay. Estado don tisica corria tomado era volado largos paz. Un original su prosaica tenorios de trabajar estomago victimas yo. Constante favoritas caserones que las vez cantantes enterarse vendamont eso. Dar preteritas tal partituras era con costumbres. Casar ma venta el si yo furia feliz local. Recibio publico balsamo mil espanol hombres empresa una aun. Caudal versos idioma un le cascos yo andaba comuna. Sea embestir nos enemigos tormenta los escribia.
-                Alarde echaba sin pesado era garita afuera cortar. Las dos contrastes dio levantaban mal imprevisto envejecido. Se os la vuelto de baccio debido mareos perder. Las excesiva cantidad pan suspiros perpetua fue uno terminos. Vano fue lado esa otro suo sois. Soy toses saber mil valga ser han. Mal sigilo motivo rincon ruinas ola.
-                Bien juan fin tan cuyo eran etc iba. La racional acogiera so hospital eh italiana no energico superior. Dogma poeta media lo ya final redor subia. Unica esa una cinco media. Ve entonces da ya suspiros escapado pegollos heredera. Venia justa apuro so se. Es ofenderle consistia importuno el maniobras he no extremada vagamente. Su il guapa daban ir mitad gesto no.
-            </p>
+            <div class="card-text">
+                <p>Desde está sección se realiza todas las operaciones de almacenaje, envío a reparación, instalación y baja de los equipos de la entidad.</p>
+                </br>
+                <h5><strong>Listado</strong></h5>
+                <p>Muestra de forma tabulada y con paginación, el listado de operaciones activas</p>
+                <p>Disponemos de las siguientes funcionalidades</p>
+                <ul>
+                    <li><strong>Cuadro de búsqueda:</strong> Permite realizar búsquedas de forma conjunta en los campos: Tipo Operación, Tipo de Equipo, Código Interno del Equipo, Persona, Ubicación y Técnico</li>
+                    <li><strong>Acción - ins (instalación):</strong> Accede al formulario "Ficha de Operación" para generar una nueva operación de instalación del equipo referenciado en la fila. No se puede realizar una operación sobre un equipo dado de baja.</li>
+                    <li><strong>Acción - alm (almacenaje):</strong> Genera una nueva operación de envío a almacen sobre del equipo referenciado en la fila. Esta operación quedará marcada como activa. El resto de operaciones asociadas al equipo pasaran a NO activas. No se puede realizar una operación sobre un equipo dado de baja.</li>
+                    <li><strong>Acción - rep (envío a reparación):</strong> Genera una nueva operación de envío a reparación sobre del equipo referenciado en la fila. Esta operación quedará marcada como activa. El resto de operaciones asociadas al equipo pasaran a NO activas. No se puede realizar una operación sobre un equipo dado de baja.</li>
+                    <li><strong>Acción - baja (baja):</strong> Genera una nueva operación de baja sobre del equipo referenciado en la fila. Esta operación quedará marcada como activa. El resto de operaciones asociadas al equipo pasaran a NO activas. No se puede realizar una operación sobre un equipo dado de baja.</li>
+                </ul>
+                </br>
+                <h5><strong>Ficha de Operación - Instalación</strong></h5>
+                <p>Dispone de los campos necesarios para definir la operación de instalación sobre el equipo. Podemos indicar a la persona y en la ubicación donde se va a realizar la operación de instalación. Al finalizar, esta operación quedará marcada como activa. El resto de operaciones asociadas al equipo pasaran a NO activas</p>
+
+            </div>
         </div>
     </div>
     @endif
@@ -236,12 +248,35 @@
         <div class="card-body">
             <h3 class="card-title"><strong>Consultas</strong>
             </h3>
-            <p class="card-text">
-                Ahi permanecer misteriosa arriesgada soy taciturnos aficionado suficiente. Un piedad al si partes bienes menudo la. Paseaban mi retirado prestaba aturdida ha saltaron ma humildes. Leer esas seca es la diga en gran cera. Mas dia reyes desde ebano por. Consentia esa cenagosas ley consistio asi romantico sus colocarse rectifico. No costumbre va observaba si te formarlas. Veia tu me duro oh os nina. Implacable sobrevenir don sin oyo desencanto.
-                En templados temblando ni gentilica un ay. Estado don tisica corria tomado era volado largos paz. Un original su prosaica tenorios de trabajar estomago victimas yo. Constante favoritas caserones que las vez cantantes enterarse vendamont eso. Dar preteritas tal partituras era con costumbres. Casar ma venta el si yo furia feliz local. Recibio publico balsamo mil espanol hombres empresa una aun. Caudal versos idioma un le cascos yo andaba comuna. Sea embestir nos enemigos tormenta los escribia.
-                Alarde echaba sin pesado era garita afuera cortar. Las dos contrastes dio levantaban mal imprevisto envejecido. Se os la vuelto de baccio debido mareos perder. Las excesiva cantidad pan suspiros perpetua fue uno terminos. Vano fue lado esa otro suo sois. Soy toses saber mil valga ser han. Mal sigilo motivo rincon ruinas ola.
-                Bien juan fin tan cuyo eran etc iba. La racional acogiera so hospital eh italiana no energico superior. Dogma poeta media lo ya final redor subia. Unica esa una cinco media. Ve entonces da ya suspiros escapado pegollos heredera. Venia justa apuro so se. Es ofenderle consistia importuno el maniobras he no extremada vagamente. Su il guapa daban ir mitad gesto no.
-            </p>
+            <div class="card-text">
+                <p>Desde está sección se puede realizar multiples consultas sobre todas las operaciones realizadas (tanto activas cómo no activas).</p>
+                </br>
+                <h5><strong>Listado</strong></h5>
+                <p>Muestra de forma tabulada y con paginación, el listado de operaciones. Estas operaciones son el resultado de la consulta a partir de la aplicación de los filtros. Si no se utilizan los filtros se muestran todas las operaciones.</p>
+                <p>Sólo se aplica en la consulta los filtros que se han rellenado. Disponemos de los siguientes filtros:</p>
+                <ul>
+                    <li><strong>Cod.Interno:</strong> Autocompletable. Código interno del equipo al que se ha aplicado la operación.</li>
+                    <li><strong>Técnico:</strong> Seleccionable. Técnico que ha realizado la operación.</li>
+                    <li><strong>Persona:</strong> Seleccionable. Persona a la que se le ha vinculado el equipo al realizar la operación.</li>
+                    <li><strong>Ubicación:</strong> Seleccionable. Ubicación a la que se le ha vinculado el equipo al realizar la operación.</li>
+                    <li><strong>Tipo de operación:</strong> Seleccionable. Tipo de operación aplicable a la operación.</li>
+                    <li><strong>Desde fecha operación:</strong> Completable. Fecha de operación desde la cual se va a realizar la búsqueda.</li>
+                    <li><strong>Hasta fecha operación:</strong> Completable. Fecha de operación hasta la cual se va a realizar la búsqueda.</li>
+                    <li><strong>Tipo de Equipo:</strong> Seleccionable. Tipo del equipo al que se ha aplicado la operación.</li>
+                    <li><strong>Marca:</strong> Seleccionable. Marca del equipo al que se ha aplicado la operación.</li>
+                    <li><strong>Modelo:</strong> Seleccionable. Modelo del equipo al que se ha aplicado la operación.</li>
+                    <li><strong>Product Number:</strong> Autocompletable. Product Number del equipo al que se ha aplicado la operación.</li>
+                    <li><strong>Número de Serie:</strong> Autocompletable.Número de Serie del equipo al que se ha aplicado la operación.</li>
+                    <li><strong>Contratación:</strong> Seleccionable. Contratación al que pertenece, en el caso que sea, del equipo al que se ha aplicado la operación.</li>
+                    <li><strong>Mostrar sólo operaciones activas:</strong> Marcable. Muestra sólo en los resultados de la búsqueda las operaciones activas.</li>
+                </ul>
+                </br>
+                <p>Disponemos de las siguientes acciones</p>
+                <ul>
+                    <li><strong>Ver:</strong> Muestra la ficha de operación de la operación referenciada en la fila.</li>
+                    <li><strong>Exportar a PDF:</strong> Genera y descarga un archivo pdf con una tabla con los resultados de la búsqueda.</li>
+                </ul>
+            </div>
         </div>
     </div>
     @endif
