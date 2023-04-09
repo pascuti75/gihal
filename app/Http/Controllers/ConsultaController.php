@@ -162,7 +162,7 @@ class ConsultaController extends Controller
     public function show($id)
     {
         //recuperamos la operación a partir del parámetro id obtenido de la petición get
-        $operacion  = Operacion::findOrFail($id);
+        $operacion  = Operacion::find($id);
 
         //nos redirigimos a la ficha de la operación pasándole la información de esta
         return view('consulta.show', compact('operacion'));

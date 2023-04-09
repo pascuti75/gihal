@@ -9,31 +9,49 @@ use App\Models\Contratacion;
 use App\Models\Operacion;
 use Illuminate\Support\Facades\Validator;
 
-// llamar a la referencia del modelo
+/*
+--------------------------------------------------------------------------
+ Equipo Controller
+--------------------------------------------------------------------------
+ Este controlador realiza el manejo de la funcionalidad de la gestión de equipos y las redirecciones 
+a partir de la funcion definida en las rutas de la gestión de equipos
+
+La relación entre las rutas, el controlador, y los métodos es la siguiente: 
+
+GET|HEAD   equipo ................................................... equipo.index › EquipoController@index  
+POST       equipo ................................................... equipo.store › EquipoController@store  
+GET|HEAD   equipo/create ........................................... equipo.create › EquipoController@create  
+PUT|PATCH  equipo/{equipo} ......................................... equipo.update › EquipoController@update  
+DELETE     equipo/{equipo} ........................................ equipo.destroy › EquipoController@destroy  
+GET|HEAD   equipo/{equipo}/edit ...................................... equipo.edit › EquipoController@edit
+*/
 
 class EquipoController extends Controller
 {
 
+    /*
+    Devuelve el listado de equipos en función si se ha realizado búsqueda.
+    Redirige a la vista con el listado de resultados
+   */
     public function index(Request $request)
     {
-        $equipos_query = Equipo::query();
-
+        //recuperamos de la peticion get el parámetro de búsqueda
         $search_param = $request->query('query');
 
+        //devolvemos el listado de equipos total o filtrado en función si disponemos parámetro de búsqueda
         if ($search_param) {
-            $equipos_query = Equipo::search($search_param)->orderBy('id', 'asc')->paginate(5);
+            $equipos = Equipo::search($search_param)->orderBy('id', 'asc')->paginate(5);
         } else {
-            $equipos_query = Equipo::orderBy('id', 'asc')->paginate(5);
+            $equipos = Equipo::orderBy('id', 'asc')->paginate(5);
         }
 
-        $equipos = $equipos_query;
-
+        //Nos redirigimos a la vista del listado de equipos con el resultado de equipos obtenido
         return view('equipo.index', compact('equipos', 'search_param'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    /*
+     Redirige a la vista con el formulario de creación de equipos
+   */
     public function create()
     {
 
@@ -46,13 +64,13 @@ class EquipoController extends Controller
         return view('equipo.create', compact(['tipos', 'contrataciones']));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    /*
+     Almacena en base de datos la información del nuevo equipo creado.
+     Redirige a la vista con el listado de equipos.
+   */
     public function store(Request $request)
     {
         //campos para validar
-
         $campos = [
             'cod_interno' => 'nullable|string|max:100',
             'cod_externo' => 'nullable|string|max:100',
@@ -78,14 +96,13 @@ class EquipoController extends Controller
             'num_serie.max' => 'El número de serie debe de tener una longitud menor o igual a 100 caracteres',
         ];
 
-
+        //se realiza la validación
         $this->validate($request, $campos, $mensaje);
-
+        //Creamos el nuevo equipo y la guardamos con los datos registrados por la petición post
         $equipo  = new Equipo($request->all());
         $equipo->save();
 
-        //creamos la operacion de almacenaje asociada a a creacion del equipo
-       
+        //creamos la operacion de almacenaje asociada a la creacion del equipo
         $operacion  = new Operacion();
         $operacion->fecha_operacion = now()->format('Y-m-d H:i:s');
         $operacion->tipo_operacion = 'almacenaje';
@@ -93,33 +110,30 @@ class EquipoController extends Controller
         $operacion->id_ubicacion = 1; //la ubicacion 1 siempre debe de ser el almacen
         $operacion->save();
 
+        //Nos redirigimos a la vista del listado de equipos
         return redirect()->action([EquipoController::class, 'index'])->with('mensaje', 'El equipo se ha creado correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Equipo $equipo)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    /*
+     Redirige a la vista con el formulario para la edición de un equipo en particular
+   */
     public function edit($id)
     {
-        $equipo  = Equipo::findOrFail($id);
+        //recuperamos el equipo a partir de su id recuperado por la petición GET
+        $equipo  = Equipo::find($id);
         //para campo combo selector de tipo
         $tipos  = TipoEquipo::all()->sortBy("tipo");
         //para campo combo selector de contratacion
         $contrataciones  = Contratacion::all()->sortBy("titulo");
+        //Nos redirigimos al formario de edición de la ficha de equipo con los datos del equipo recuperado
         return view('equipo.edit', compact('equipo', 'tipos', 'contrataciones'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    /*
+     Actualiza en base de datos la información del equipo editado.
+     Redirige a la vista con el listado de equipos.
+   */
     public function update(Request $request, $id)
     {
 
@@ -148,24 +162,25 @@ class EquipoController extends Controller
             'num_serie.max' => 'El número de serie debe de tener una longitud menor o igual a 100 caracteres',
         ];
 
-
+        //se realiza la validación
         $this->validate($request, $campos, $mensaje);
 
-
-        $equipo  = Equipo::findOrFail($id);
+        //actualizamos en base de datos la información del equipo
+        $equipo  = Equipo::find($id);
         $equipo->fill($request->all());
         $equipo->save();
-        //para volver a mostrar el contenido del equipo modificado
-        $equipo  = Equipo::findOrFail($id);
+        //Nos redirigimos a la vista del listado de equipos
         return redirect()->action([EquipoController::class, 'index'])->with('mensaje', 'El equipo se ha modificado correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    /*
+     Eliminamos en base de datos el equipo indicado.
+     Redirige a la vista con el listado de equipos.
+   */
     public function destroy($id)
     {
         try {
+            //eliminamos en base de datos el equipo a partir de su id recuperado de la petición DELETE
             Equipo::destroy($id);
             return redirect()->action([EquipoController::class, 'index'])->with('mensaje', 'El equipo se ha eliminado correctamente');
         } catch (\Illuminate\Database\QueryException $e) {

@@ -6,32 +6,49 @@ use Illuminate\Http\Request;
 use App\Models\TipoEquipo;
 use Illuminate\Support\Facades\Validator;
 
-// llamar a la referencia del modelo
+/*
+--------------------------------------------------------------------------
+ TipoEquipo Controller
+--------------------------------------------------------------------------
+ Este controlador realiza el manejo de la funcionalidad de la gestión de tipos de equipo y las redirecciones 
+a partir de la funcion definida en las rutas de la gestión de tipos de equipo.
+
+La relación entre las rutas, el controlador, y los métodos es la siguiente: 
+
+GET|HEAD   tipo_equipo ......................................... tipo_equipo.index › TipoEquipoController@index  
+POST       tipo_equipo ......................................... tipo_equipo.store › TipoEquipoController@store  
+GET|HEAD   tipo_equipo/create ................................. tipo_equipo.create › TipoEquipoController@create  
+PUT|PATCH  tipo_equipo/{tipo_equipo} .......................... tipo_equipo.update › TipoEquipoController@update  
+DELETE     tipo_equipo/{tipo_equipo} ......................... tipo_equipo.destroy › TipoEquipoController@destroy  
+GET|HEAD   tipo_equipo/{tipo_equipo}/edit ....................... tipo_equipo.edit › TipoEquipoController@edit  
+*/
 
 class TipoEquipoController extends Controller
 {
 
-
+    /*
+    Devuelve el listado de tipos de equipo en función si se ha realizado búsqueda.
+    Redirige a la vista con el listado de tipos de equipo
+   */
     public function index(Request $request)
     {
-        $tipos_equipo_query = TipoEquipo::query();
-
+        //recuperamos de la peticion get el parámetro de búsqueda
         $search_param = $request->query('query');
 
+        //devolvemos el listado de tipos de equipo total o filtrado en función si disponemos parámetro de búsqueda
         if ($search_param) {
-            $tipos_equipo_query = TipoEquipo::search($search_param)->orderBy('cod_tipo_equipo', 'asc')->paginate(5);
+            $tipos_equipo = TipoEquipo::search($search_param)->orderBy('cod_tipo_equipo', 'asc')->paginate(5);
         } else {
-            $tipos_equipo_query = TipoEquipo::orderBy('cod_tipo_equipo', 'asc')->paginate(5);
+            $tipos_equipo = TipoEquipo::orderBy('cod_tipo_equipo', 'asc')->paginate(5);
         }
 
-        $tipos_equipo = $tipos_equipo_query;
-
+        //Nos redirigimos a la vista del listado de tipos de equipo con el resultado de tipos de equipo obtenido
         return view('tipo_equipo.index', compact('tipos_equipo', 'search_param'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    /*
+     Redirige a la vista con el formulario de creación de tipos de equipo
+   */
     public function create()
     {
 
@@ -39,9 +56,10 @@ class TipoEquipoController extends Controller
         return view('tipo_equipo.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    /*
+     Almacena en base de datos la información del nuevo tipo de equipo creado.
+     Redirige a la vista con el listado de tipos de equipo.
+   */
     public function store(Request $request)
     {
         //campos para validar
@@ -59,35 +77,32 @@ class TipoEquipoController extends Controller
             'cod_tipo_equipo.unique' => 'El código de tipo de equipo ya está en uso',
         ];
 
-
+        //se realiza la validación
         $this->validate($request, $campos, $mensaje);
 
-
+        //Creamos el nuevo tipo de equipo y lo guardamos con los datos registrados por la petición post
         $tipo_equipo = new TipoEquipo($request->all());
         $tipo_equipo->save();
+        //Nos redirigimos a la vista del listado de tipos de equipo
         return redirect()->action([TipoEquipoController::class, 'index'])->with('mensaje', 'El tipo de equipo se ha creado correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(TipoEquipo $tipo_equipo)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    /*
+     Redirige a la vista con el formulario para la edición de un tipo de equipo en particular
+   */
     public function edit($id)
     {
-        $tipo_equipo = TipoEquipo::findOrFail($id);
+        //recuperamos el tipo de equipo a partir de su id recuperado por la petición GET
+        $tipo_equipo = TipoEquipo::find($id);
+        //Nos redirigimos al formario de edición de la ficha de tipo de equipo con los datos del tipo de equipo recuperado
         return view('tipo_equipo.edit', compact('tipo_equipo'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    /*
+     Actualiza en base de datos la información del tipo de equipo editado.
+     Redirige a la vista con el listado de tipos de equipos.
+   */
     public function update(Request $request, $id)
     {
 
@@ -103,28 +118,27 @@ class TipoEquipoController extends Controller
             'cod_tipo_equipo.max' => 'El código debe de tener una longitud menor o igual a 3 caracteres',
             'tipo.required' => 'El tipo es obligatorio',
             'tipo.max' => 'El tipo debe de tener una longitud menor o igual a 100 caracteres',
-            ];
+        ];
 
-
-
+        //se realiza la validación
         $this->validate($request, $campos, $mensaje);
 
-
-
-        $tipo_equipo = TipoEquipo::findOrFail($id);
+        //actualizamos en base de datos la información del tipo de equipo
+        $tipo_equipo = TipoEquipo::find($id);
         $tipo_equipo->fill($request->all());
         $tipo_equipo->save();
-        //para volver a mostrar el contenido de la contratacion modificada
-        $tipo_equipo = TipoEquipo::findOrFail($id);
+        //Nos redirigimos a la vista del listado detipos de equipo
         return redirect()->action([TipoEquipoController::class, 'index'])->with('mensaje', 'El tipo de equipo se ha modificado correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    /*
+     Eliminamos en base de datos el tipo de equipo indicado.
+     Redirige a la vista con el listado de tipos de equipo.
+   */
     public function destroy($id)
     {
         try {
+            //eliminamos en base de datos el tipo de equipo a partir de su id recuperado de la petición DELETE
             TipoEquipo::destroy($id);
             return redirect()->action([TipoEquipoController::class, 'index'])->with('mensaje', 'El tipo de equipo se ha eliminado correctamente');
         } catch (\Illuminate\Database\QueryException $e) {

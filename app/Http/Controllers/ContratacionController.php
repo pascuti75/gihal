@@ -19,7 +19,6 @@ La relación entre las rutas, el controlador, y los métodos es la siguiente:
 GET|HEAD   contratacion ....................................... contratacion.index › ContratacionController@index  
 POST       contratacion ....................................... contratacion.store › ContratacionController@store  
 GET|HEAD   contratacion/create ............................... contratacion.create › ContratacionController@create  
-GET|HEAD   contratacion/{contratacion} ......................... contratacion.show › ContratacionController@show  
 PUT|PATCH  contratacion/{contratacion} ....................... contratacion.update › ContratacionController@update  
 DELETE     contratacion/{contratacion} ...................... contratacion.destroy › ContratacionController@destroy  
 GET|HEAD   contratacion/{contratacion}/edit .................... contratacion.edit › ContratacionController@edit
@@ -83,7 +82,6 @@ class ContratacionController extends Controller
             'empresa.max' => 'La empresa debe de tener una longitud menor o igual a 250 caracteres',
         ];
 
-
         //se realiza la validación
         $this->validate($request, $campos, $mensaje);
 
@@ -94,21 +92,13 @@ class ContratacionController extends Controller
         return redirect()->action([ContratacionController::class, 'index'])->with('mensaje', 'La contratación se ha creado correctamente');
     }
 
-    /**
-     * No aplica en este proyecto
-     */
-    public function show(Contratacion $contratacion)
-    {
-        //
-    }
-
     /*
      Redirige a la vista con el formulario para la edición de una contratación en particular
    */
     public function edit($id)
     {
         //recuperamos la contratación a partir de su id recuperado por la petición GET
-        $contratacion = Contratacion::findOrFail($id);
+        $contratacion = Contratacion::find($id);
         //Nos redirigimos al formario de edición de la ficha de operación con los datos de la operación recuperada
         return view('contratacion.edit', compact('contratacion'));
     }
@@ -142,7 +132,7 @@ class ContratacionController extends Controller
         $this->validate($request, $campos, $mensaje);
 
         //actualizamos en base de datos la información de la contratación
-        $contratacion = Contratacion::findOrFail($id);
+        $contratacion = Contratacion::find($id);
         $contratacion->fill($request->all());
         $contratacion->save();
         //Nos redirigimos a la vista del listado de contrataciones
