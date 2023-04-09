@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+//Definición de middelware para controlar el acceso de un usuario autentificado a secciones restringidas para perfil de acceso es_administrador
 class EsAdministrador
 {
     /**
