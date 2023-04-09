@@ -12,21 +12,19 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
 
- 
+
 
     public function index(Request $request)
     {
-        $users_query = User::query();
 
         $search_param = $request->query('query');
 
         if ($search_param) {
-            $users_query = User::search($search_param)->orderBy('id', 'asc')->paginate(5);
+            $users = User::search($search_param)->orderBy('id', 'asc')->paginate(5);
         } else {
-            $users_query = User::paginate(5);
+            $users = User::paginate(5);
         }
 
-        $users = $users_query;
 
         return view('usuario.index', compact('users', 'search_param'));
     }
