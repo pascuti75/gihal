@@ -35,7 +35,7 @@
                     <select class="form-select" name="id_contratacion" id="id_contratacion">
                         <option value="">Seleccionar</option>
                         @foreach ($contrataciones as $contratacion)
-                        <option value="{{$contratacion->id}}" {{isset($equipo->id_contratacion) ? (old('id_contratacion',$equipo->id_contratacion) == $contratacion->id ? 'selected' : '') : (old('id_contratacion') == $contratacion->id ? 'selected' : '')}}>{{$contratacion->titulo}}</option>
+                        <option value="{{$contratacion->id}}" {{isset($equipo->id_contratacion) ? (old('id_contratacion',$equipo->id_contratacion) == $contratacion->id ? 'selected' : '') : (old('id_contratacion') == $contratacion->id ? 'selected' : '')}}>{{Str::limit($contratacion->titulo, 100)}}</option>
                         @endforeach
                     </select>
                 </div>

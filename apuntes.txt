@@ -156,3 +156,91 @@ descomenatmos lo siguiente:
 
  <!-- <env name="DB_CONNECTION" value="sqlite"/> -->
  <!-- <env name="DB_DATABASE" value=":memory:"/> -->
+
+
+
+
+ ***********************************************************************************
+ para documentacion
+ ***********************************************************************************
+ - Instalar composer (en widnows es un instalable)
+ la version que tengo es: Composer version 2.4.4 2022-10-27 14:39:29
+
+- Instalar node.js 
+version instalada: v18.12.0
+
+- Version de npm 8.19.2
+
+- instalar php 
+version instalada: PHP 8.1.10 
+
+- Apache version: Server version: Apache/2.4.54 (Win64) con el modulo php habilitado
+
+- Mysql version: 8.0.32
+
+- version de laravel: Laravel Framework 10.0.3
+
+Desplegar el proyecto en 
+
+Version Linux:
+
+cd /var/www/html
+descomprimimos el proyecto gihal.zip
+
+asignamos los permisos
+sudo chgrp -R www-data /var/www/html/gihal
+sudo chmod -R 775 /var/www/html/gihal/storage
+
+creamos el virtualhost
+
+cd /etc/apache2/sites-available
+sudo nano laravel.conf
+
+<VirtualHost *:80>
+    ServerName gihal.test
+    ServerAdmin admin@localhost
+    DocumentRoot "/var/www/html/gihal/public"
+    <Directory "/var/www/html/gihal/public">
+        AllowOverride All
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+editamos el fichero hosts
+sudo nano /etc/hosts
+
+agregamos al final
+127.0.0.1 gihal.test
+
+
+PAra configurar el apache en entorno XAMPP
+Editar el fichero: httpd-vhosts.conf
+
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs/gihal/public"
+    ServerName gihal.test
+    <Directory "C:/xampp/htdocs/gihal/public">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+Reemplazar la ruta hasta el directorio public
+
+en el archivo host incluimos:
+127.0.0.1 gihal.test
+
+
+//para cargar la case de datos por scripts ejecutar en este orden
+ - 1_gihal_estructura.sql
+ - 2_gihal_datos.sql
+
+ Tambien se puede cargar la estructura de tablas por migraciones de laravel
+ php artisan migrate
+
+ y los datos por seeders de laravel
+ php artisan db:seed --class=UserSeeder
+ php artisan db:seed --class=UbicacionSeeder
+
+

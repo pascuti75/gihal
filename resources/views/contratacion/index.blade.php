@@ -53,7 +53,7 @@
                 {{-- recorremos las contrataciones obtenidos desde el controlador para montar el contenido la tabla --}}
                 @foreach( $contrataciones as $contratacion)
                 <tr>
-                    <td>{{ $contratacion->id }}</td>
+                    <td class="text-center">{{ $contratacion->id }}</td>
                     <td>{{ $contratacion->titulo }}</td>
                     <td>{{ $contratacion->empresa }}</td>
                     <td class="text-center">{{ isset($contratacion->fecha_inicio) ? date('d/m/Y',strtotime($contratacion->fecha_inicio)):'' }} </td>

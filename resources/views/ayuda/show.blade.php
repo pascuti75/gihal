@@ -38,7 +38,7 @@
             </p>
         </div>
     </div>
-    @if(Auth::user()->es_administrador)
+
     <div id="section-1" class="card mt-3 section">
         <div class="card-body">
             <h3 class="card-title"><strong>Introducción</strong>
@@ -67,8 +67,7 @@
             </div>
         </div>
     </div>
-    @endif
-    @if(Auth::user()->es_gestor)
+    @if(Auth::user()->es_administrador)
     <div id="section-2" class="card mt-3 section">
         <div class="card-body">
             <h3 class="card-title"><strong>Administración de usuarios</strong>
@@ -96,6 +95,8 @@
             </div>
         </div>
     </div>
+    @endif
+    @if(Auth::user()->es_gestor)
     <div id="section-3" class="card mt-3 section">
         <div class="card-body">
             <h3 class="card-title"><strong>Gestión de ubicaciones</strong>
